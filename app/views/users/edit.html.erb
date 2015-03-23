@@ -1,0 +1,9 @@
+<h1>Edit User</h1>
+
+<%= form_for(@user) do |form| %>
+	<%= render form %><br>
+	<%= form.submit 'Save Changes' %>
+<% end %>
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>
