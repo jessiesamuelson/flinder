@@ -29,6 +29,10 @@ gem 'annotate', '~> 2.6.8'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# Twitter Gems
+gem 'twitter'
+gem 'twitter_oauth'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

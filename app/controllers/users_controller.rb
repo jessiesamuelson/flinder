@@ -7,6 +7,28 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def twitter_login
+    if current_user && current_user.oauth_token
+      redirect_to "/users/#{current_user.id}"
+    else  
+      session[:twitter_request_token] = twitter_accessor.get_request_token 
+      redirect_to session[:twitter_request_token].authorize_url
+    end
+
+  end
+
+  def twitter_callback
+    request_token = session[:twitter_request_token]
+    access_token = twitter_accessor.authorize(request_token, params[:oauth_verifier])
+    
+    current_user.oauth_token = access_token.token
+    current_user.oauth_secret = access_token.secret
+
+    current_user.save!
+
+    redirect_to "/users/#{current_user.id}"
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show

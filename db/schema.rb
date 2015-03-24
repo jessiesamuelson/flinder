@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20150323213432) do
     t.string   "password_digest", null: false
     t.string   "region"
     t.string   "session_token"
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
