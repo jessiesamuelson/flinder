@@ -14,7 +14,6 @@ class UsersController < ApplicationController
       session[:twitter_request_token] = twitter_accessor.get_request_token 
       redirect_to session[:twitter_request_token].authorize_url
     end
-
   end
 
   def twitter_callback
