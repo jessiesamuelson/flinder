@@ -6,7 +6,9 @@ class CreateUsers < ActiveRecord::Migration
     	t.string :password_digest, null: false
     	t.string :region
     	t.string :session_token
-
+      t.string :oauth_token 
+      t.string :oauth_secret
+       
       t.timestamps null: false
     end
   end

@@ -1,0 +1,16 @@
+<div id="container">
+	<section id="tweets">
+		<div id="tweetlist">
+			<div id="tweetHeader"></div>
+			<div id="twitter_logo"><a href="https://twitter.com/" target="_blank"><img src="/Twitter_logo_blue.png"></a></div>
+			 <ul>
+ 				<% if @tweets %>
+   				<% @tweets.each do |tweet| %>
+   
+     			<li><%= link_to tweet["text"], "https://www.twitter.com/#{tweet['user']['screen_name']}", :target => "_blank" %></li>
+			    <% end %>
+			 	<% end %>
+			 </ul>
+		</div>
+	</section>
+</div>

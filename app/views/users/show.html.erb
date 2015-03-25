@@ -4,6 +4,11 @@
 <p>Region: <%= @user.region %></p>
 <p>Email: <%= @user.email %></p>
 
+
+<% if @user.oauth_token %>
+  <%= render 'shared/tweets' %>
+<% end %>
+
 <% if @user == current_user %>
 	<%= link_to 'Edit', edit_user_path(@user) %> |
 	<%= link_to 'Delete Account', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |

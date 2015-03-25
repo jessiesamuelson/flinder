@@ -6,4 +6,8 @@
 	<%= f.submit 'Log In!' %>
 <% end %>
 
+<% if !@user.oauth_token %>
+  <%= button_to "LoginWithTwitter", '/users/twitterlogin', method: "get" %>
+<% end %>
+
 <p>Don't have an account yet? <%= link_to 'Sign Up', signup_path %></p>
