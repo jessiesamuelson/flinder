@@ -4,6 +4,7 @@
 <p>Region: <%= @user.region %></p>
 <p>Email: <%= @user.email %></p>
 
+<ul id="nytimes-results"></ul>
 
 <% if @user.oauth_token %>
   <%= render 'shared/tweets' %>
