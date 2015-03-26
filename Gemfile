@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
+# source 'https://rails-assets.org'
 
+gem 'rails_12factor'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -32,10 +34,16 @@ gem 'bcrypt', '~> 3.1.7'
 # Twitter Gems
 gem 'twitter'
 gem 'twitter_oauth'
+# NYTimes/times_wire
+# gem "times_wire", "~> 0.9.0"
+
+# HTTParty
+gem 'httparty'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+  gem 'rack-cors', :require => 'rack/cors'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -52,5 +60,6 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
 end
 

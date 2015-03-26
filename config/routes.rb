@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   get '/users/twitter_callback' => :twitter_callback, controller: :users
 
+  
+  get '/nytimes_fetch', to: 'nyt#get_article'
+
   resources :users
   resource :session, only: [:new, :create, :destroy]
 

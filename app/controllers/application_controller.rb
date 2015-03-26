@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
       @tweets = twitter_accessor.client.user_timeline.take(15)
     end
   end
+
+  # def nytimes
+  #   render text: Net::HTTP.get(URI("http://api.nytimes.com/svc/news/v3/content.json?api-key=#{Rails.application.secrets.nyt_newsWire_apiKey}"))
+  # end
   
   private
 
