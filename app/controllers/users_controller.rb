@@ -25,12 +25,13 @@ class UsersController < ApplicationController
 
     current_user.save!
 
-    redirect_to "/users/#{current_user.id}"
+    redirect_to user_path(current_user)
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+
   end
 
   # GET /users/new

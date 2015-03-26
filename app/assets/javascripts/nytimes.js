@@ -9,8 +9,7 @@ function getResults() {
     url: '/nytimes_fetch',
     dataType: 'json',
     error: function(data){
-    	debugger;
-    	console.log(data);
+    	console.log(data['responseText']);
     }
   });
 };
