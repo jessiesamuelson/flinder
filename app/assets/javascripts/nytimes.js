@@ -8,8 +8,8 @@ function getResults() {
   $.ajax({
     url: '/nytimes_fetch',
     dataType: 'json',
-    error: function(data){
-    	console.log(data['responseText']);
+    success: function(data){
+    	console.log(data);
     }
   });
 };
