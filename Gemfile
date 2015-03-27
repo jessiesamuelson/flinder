@@ -34,6 +34,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Twitter Gems
 gem 'twitter'
 gem 'twitter_oauth'
+
 # NYTimes/times_wire
 # gem "times_wire", "~> 0.9.0"
 
