@@ -3,14 +3,24 @@
 		<div id="tweetlist">
 			<div id="tweetHeader"></div>
 			<!-- <div id="twitter_logo"><a href="https://twitter.com/" target="_blank"><img src="/Twitter_logo_blue.png"></a></div> -->
-			 <ul>
- 				<% if @tweets %>
-   				<% @tweets.each do |tweet| %>
-   
-     			<li><%= link_to tweet["text"], "https://www.twitter.com/#{tweet['user']['screen_name']}", :target => "_blank" %></li>
-			    <% end %>
-			 	<% end %>
-			 </ul>
+
+			<h1>Twitter Search results: </h1>
+			<ul>
+			  <% @tweets.each do |tweet| %>
+			    <li><%= tweet.text %></li>
+			   <% end %>
+			</ul>
+			
+			<h1>My Twitter Feed: </h1>
+			<ul>
+			  <% if @my_tweets %>
+	         <% @my_tweets.each do |tweet| %>
+
+	       <li><%= link_to tweet["text"], "https://www.twitter.com/#{tweet['user']['screen_name']}", :target => "_blank" %></li>
+	      <% end %>
+       <% end %>
+			</ul>
+
 		</div>
 	</section>
 </div>
