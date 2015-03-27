@@ -25,19 +25,17 @@ class NytController < ApplicationController
 
 	def topic
 		@articles = HTTParty.get("http://api.nytimes.com/svc/news/v3/content/all/world.json?api-key=#{Rails.application.secrets.nyt_newsWire_apiKey}")
-		
+	
 		hash = @articles['results'].group_by do |article|
-			article['des_facet']
+			article['des_facet'][0]
 		end
 		
-		# facet_count = Hash.new { |h,k| h[k] = [] }
-		# hash.each do |facet, articles|
-		# 	facet_count[facet] = articles.length
-		# end
-		
-		# facet_count.delete_if { |k,v| k == "" }
+		facet_count = Hash.new { |h,k| h[k] = [] }
+		hash.each do |facet, articles|
+			facet_count[facet] = articles.length
+		end
 
-		binding.pry
+		facet_count.delete_if { |k,v| k == nil }
 	end
 
 end

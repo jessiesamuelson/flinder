@@ -13,10 +13,20 @@ class ApplicationController < ActionController::Base
 
   # Determines what tweets are loaded onto page.  
   # Return to here with more relevant search credentials
+  # def load_tweets
+  #   if twitter_accessor.client
+  #     @tweets = twitter_accessor.client.search("technology", result_type: "recent").take(15)
+  #   end
+  # end
+  
   def load_tweets
-    if twitter_accessor.client
-      @tweets = twitter_accessor.client.user_timeline.take(15)
+    default_client = Twitter::REST::Client.new do |config|
+      config.consumer_key = Rails.application.secrets.consumer_key
+      config.consumer_secret = Rails.application.secrets.consumer_secret
+      config.access_token = Rails.application.secrets.access_token
+      config.access_token_secret = Rails.application.secrets.access_token_secret
     end
+     @tweets = twitter_accessor.client.user_timeline.take(15)
   end
 
   # def nytimes
