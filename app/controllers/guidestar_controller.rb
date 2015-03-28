@@ -1,35 +1,16 @@
-class GuidestarController < ApplicationController
-<<<<<<< HEAD
-	require 'HTTParty'
+# class GuidestarController < ApplicationController
+#   require 'HTTParty'
 
-	def get_org
-		# auth = {:username => Rails.application.secrets.guidestar_userName, :password => Rails.application.secrets.guidestar_password }
-
-		auth = {:username => '', :password => '' }
-
-		@orgs = HTTParty.get('https://sandboxdata.guidestar.org/v1/detail/7831216.json', :basic_auth => auth )
-
-		respond_to do |format|
-			format.json { render json: @orgs }
-		end
-	end
-
-end
-=======
-  require 'HTTParty'
-
-  def get_org
-      # auth = {:username => Rails.application.secrets.guidestar_userName, :password => Rails.application.secrets.guidestar_password }
-
-      auth = {:username => '', :password => '' }
+#   def get_org
+#       binding.pry
+#       auth = {:username => Rails.application.secrets.guidestar_username, :password => Rails.application.secrets.guidestar_password }
 
 
-      @orgs = HTTParty.get('https://sandboxdata.guidestar.org/v1/search.json?q=environment&r=5', :basic_auth => auth )
-      @orgs_list = @orgs["hits"]
-      respond_to do |format|
-          format.json { render json: @orgs_list }
-      end
-  end
+#       @orgs = HTTParty.get('https://sandboxdata.guidestar.org/v1/search.json?q=environment&r=5', :basic_auth => auth )
+#       @orgs_list = @orgs["hits"]
+#       respond_to do |format|
+#           format.json { render json: @orgs_list }
+#       end
+#   end
 
-end
->>>>>>> 8be8e4eb8d0077a56d4c7a08c52922eeb2ade5ce
+# end

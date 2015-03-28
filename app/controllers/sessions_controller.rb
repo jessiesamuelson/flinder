@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
 
 		if @user && @user.authenticate(session_params[:password])
 			login!(@user)
-			binding.pry
 			redirect_to user_path(current_user)
 		else
 			redirect_to new_session_url

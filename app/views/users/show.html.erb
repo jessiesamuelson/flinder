@@ -15,6 +15,18 @@
   <%= render 'shared/tweets' %>
 <% end %>
 
+<h1>Twitter Search result 1: </h1>
+<ul id="twitter-search-result-1">
+</ul>
+
+<h1>Twitter Search result 2: </h1>
+<ul id="twitter-search-result-2">
+</ul>
+
+<h1>Twitter Search result 3: </h1>
+<ul id="twitter-search-result-3">
+</ul>
+
 <% if @user == current_user %>
 	<%= link_to 'Edit', edit_user_path(@user) %> |
 	<%= link_to 'Delete Account', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
