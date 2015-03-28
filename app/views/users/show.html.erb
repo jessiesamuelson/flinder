@@ -15,6 +15,15 @@
   <%= render 'shared/tweets' %>
 <% end %>
 
+<h1>Twitter Search results: </h1>
+<ul id="twitter-search-results">
+	<% if @tweets %>
+  <% @tweets.each do |tweet| %>
+    <li><%= tweet.text %></li>
+   <% end %>
+ <% end %>
+</ul>
+
 <% if @user == current_user %>
 	<%= link_to 'Edit', edit_user_path(@user) %> |
 	<%= link_to 'Delete Account', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |

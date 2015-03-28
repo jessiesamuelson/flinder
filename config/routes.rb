@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get '/users/twitter_callback' => :twitter_callback, controller: :users
 
+  
+
   # NYTimes API requests
   get '/nytimes_fetch', to: 'nyt#get_article'
   get '/nytimes_facet', to: 'nyt#topic'
