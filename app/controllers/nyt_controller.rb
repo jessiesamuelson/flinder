@@ -31,7 +31,7 @@ class NytController < ApplicationController
 		facet_count.delete_if { |k,v| k == nil }
 		sorted_array = facet_count.sort_by{ |k,v| v}
 		@top_story_array = sorted_array[-5..-1]
-		session[:search_term] =  @top_story_array[4][0]
+		# session[:search_term] =  @top_story_array[4][0]
 		load_tweets(@top_story_array[4][0])
 		respond_to do |format|
 			format.json { render json: nil }

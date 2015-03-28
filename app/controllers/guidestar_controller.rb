@@ -7,7 +7,7 @@ class GuidestarController < ApplicationController
       auth = {:username => '', :password => '' }
 
 
-      @orgs = HTTParty.get('https://sandboxdata.guidestar.org/v1/search.json?q=environment&r=5', :basic_auth => auth )
+      # @orgs = HTTParty.get('https://sandboxdata.guidestar.org/v1/search.json?q=environment&r=5', :basic_auth => auth )
       @orgs_list = @orgs["hits"]
       respond_to do |format|
           format.json { render json: @orgs_list }
