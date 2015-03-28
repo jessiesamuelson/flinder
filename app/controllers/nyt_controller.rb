@@ -10,19 +10,6 @@ class NytController < ApplicationController
 		end
 	end
 
-	# def topic
-	# 	@articles = HTTParty.get("http://api.nytimes.com/svc/news/v3/content/all/world.json?api-key=#{Rails.application.secrets.nyt_newsWire_apiKey}")
-	# 	first_facet = @articles['results'][3]['des_facet'][0]
-		
-	# 	array = []
-	# 	@articles['results'].each do |article|
-	# 		if article['des_facet'][0] == first_facet
-	# 			array.push('bologne') 
-	# 		end
-	# 	end
-	# 			binding.pry
-	# end
-
 	def topic
 		# gets articles from the NYTimes API with HTTParty
 		@articles = HTTParty.get("http://api.nytimes.com/svc/news/v3/content/all/world.json?api-key=#{Rails.application.secrets.nyt_newsWire_apiKey}")
@@ -42,6 +29,13 @@ class NytController < ApplicationController
 
 		# removes all results that don't have a des_facet from the hash
 		facet_count.delete_if { |k,v| k == nil }
+		sorted_array = facet_count.sort_by{ |k,v| v}
+		@top_story_array = sorted_array[-5..-1]
+		session[:search_term] =  @top_story_array[4][0]
+		load_tweets(@top_story_array[4][0])
+		respond_to do |format|
+			format.json { render json: nil }
+		end
 	end
 
 end
