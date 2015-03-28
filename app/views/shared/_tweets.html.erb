@@ -6,9 +6,11 @@
 
 			<h1>Twitter Search results: </h1>
 			<ul>
+				<% if @tweets %>
 			  <% @tweets.each do |tweet| %>
 			    <li><%= tweet.text %></li>
 			   <% end %>
+		   <% end %>
 			</ul>
 			
 			<h1>My Twitter Feed: </h1>
