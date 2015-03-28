@@ -5,21 +5,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_search_term
   before_filter :my_tweets
-  # before_filter :load_tweets
 
   def current_user
     return nil unless session[:session_token]
     @current_user ||= User.find_by(session_token: session[:session_token]) 
   end
-
-  # def current_search_term
-  #   if session[:search_term]
-  #     session[:search_term]
-  #   else
-  #     'puppies'
-  #   end
-
-  # end
 
   # # Determines what tweets are loaded onto page.  
   # # Return to here with more relevant search credentials
@@ -30,11 +20,6 @@ class ApplicationController < ActionController::Base
       config.consumer_secret = Rails.application.secrets.consumer_secret
     end
      @tweets = client.search(search_term, result_type: "recent").take(15)
-
-     binding.pry
-     # respond_to do |format|
-     #  format.js
-     # end
   end  
 
   def my_tweets

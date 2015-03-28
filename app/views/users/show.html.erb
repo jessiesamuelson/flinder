@@ -4,9 +4,9 @@
 <p>Region: <%= @user.region %></p>
 <p>Email: <%= @user.email %></p>
 
-<!-- <h1>Guidestar search results:</h1>
+<h1>Guidestar search results:</h1>
 <ul id="guidestar-results"></ul>
- -->
+
 <h1>Times search results:</h1>
 <ul id="nytimes-results"></ul>
 
@@ -16,7 +16,7 @@
 <% end %>
 
 <h1>Twitter Search results: </h1>
-<ul>
+<ul id="twitter-search-results">
 	<% if @tweets %>
   <% @tweets.each do |tweet| %>
     <li><%= tweet.text %></li>
