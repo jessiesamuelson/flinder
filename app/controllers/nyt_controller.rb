@@ -31,14 +31,14 @@ class NytController < ApplicationController
 		facet_count.delete_if { |k,v| k == nil }
 		sorted_array = facet_count.sort_by{ |k,v| v}
 		@top_story_array = sorted_array[-5..-1]
-		@all_tweets = []
-		@top_story_array.each do |story|
-			load_tweets(story[0])
-		# binding.pry
-		end
-		# load_tweets(@top_story_array[3][0])
+		# @top_story_array.each do |story|
+		# 	load_tweets(story[0])
+		# end
+		load_tweets_1(@top_story_array[4][0])
+		load_tweets_2(@top_story_array[3][0])
+		load_tweets_3(@top_story_array[2][0])
 		respond_to do |format|
-			format.json { render json: @tweets }
+			format.json { render json: [@tweets_1, @tweets_2, @tweets_3] }
 		end
 	end
 

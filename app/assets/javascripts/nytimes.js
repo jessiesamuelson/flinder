@@ -26,12 +26,22 @@ $(function(){
     url: '/nytimes_facet',
     dataType: 'json',
     success: function(data) {
-      var $ul = $("#twitter-search-results")
-      data.forEach(function(tweet){
-        $("<li></li>").text(tweet['text']).appendTo($ul);
+      // console.log(data[0][0].id)
+      // console.log(data[0][0].user.screen_name)
+      var $ul_1 = $("#twitter-search-result-1")
+      data[0].forEach(function(tweet){
+        $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_1)
       })
-      console.log(data)
-    }
 
+      'https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id + "'
+      var $ul_2 = $("#twitter-search-result-2")
+      data[1].forEach(function(tweet){
+        $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_2)
+      })
+      var $ul_3 = $("#twitter-search-result-3")
+      data[2].forEach(function(tweet){
+        $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_3)
+      })
+    }
   })
 })

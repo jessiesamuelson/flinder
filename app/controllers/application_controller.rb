@@ -14,12 +14,40 @@ class ApplicationController < ActionController::Base
   # # Determines what tweets are loaded onto page.  
   # # Return to here with more relevant search credentials
   
-  def load_tweets(search_term)
+  def load_tweets_1(search_term)
     client = Twitter::REST::Client.new do |config|
       config.consumer_key = Rails.application.secrets.consumer_key
       config.consumer_secret = Rails.application.secrets.consumer_secret
     end
-     @tweets = client.search(search_term, result_type: "recent").take(15)
+    if client.search(search_term, result_type: "popular").any?
+      @tweets_1 = client.search(search_term, result_type: "popular", lang: 'en').take(15)
+    else
+      @tweets_1 = client.search(search_term, result_type: "recent", lang: 'en').take(15)
+    end
+  end  
+
+  def load_tweets_2(search_term)
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key = Rails.application.secrets.consumer_key
+      config.consumer_secret = Rails.application.secrets.consumer_secret
+    end
+    if client.search(search_term + ' nonprofit', result_type: "popular", lang: 'en').any?
+      @tweets_2 = client.search(search_term, result_type: "popular", lang: 'en').take(15)
+    else
+      @tweets_2 = client.search(search_term, result_type: "recent", lang: 'en').take(15)
+    end
+  end
+
+  def load_tweets_3(search_term)
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key = Rails.application.secrets.consumer_key
+      config.consumer_secret = Rails.application.secrets.consumer_secret
+    end
+    if client.search(search_term, result_type: "popular").any?
+      @tweets_3 = client.search(search_term, result_type: "popular", lang: 'en').take(15)
+    else
+      @tweets_3 = client.search(search_term, result_type: "recent", lang: 'en').take(15)
+    end
   end  
 
   def my_tweets

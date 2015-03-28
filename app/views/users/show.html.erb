@@ -15,13 +15,16 @@
   <%= render 'shared/tweets' %>
 <% end %>
 
-<h1>Twitter Search results: </h1>
-<ul id="twitter-search-results">
-	<% if @tweets %>
-  <% @tweets.each do |tweet| %>
-    <li><%= tweet.text %></li>
-   <% end %>
- <% end %>
+<h1>Twitter Search result 1: </h1>
+<ul id="twitter-search-result-1">
+</ul>
+
+<h1>Twitter Search result 2: </h1>
+<ul id="twitter-search-result-2">
+</ul>
+
+<h1>Twitter Search result 3: </h1>
+<ul id="twitter-search-result-3">
 </ul>
 
 <% if @user == current_user %>
