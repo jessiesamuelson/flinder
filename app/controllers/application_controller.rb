@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+  require "HTTParty"
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
   helper_method :current_user
@@ -19,11 +19,12 @@ class ApplicationController < ActionController::Base
       config.consumer_key = Rails.application.secrets.consumer_key
       config.consumer_secret = Rails.application.secrets.consumer_secret
     end
-    if client.search(search_term, result_type: "popular").any?
-      @tweets_1 = client.search(search_term, result_type: "popular", lang: 'en').take(15)
+    if client.search("#{search_term} OR charity", result_type: "popular").any?
+      @tweets_1 = client.search("#{search_term} OR charity", result_type: "popular", lang: 'en').take(15)
     else
-      @tweets_1 = client.search(search_term, result_type: "recent", lang: 'en').take(15)
+      @tweets_1 = client.search("#{search_term} OR charity", result_type: "recent", lang: 'en').take(15)
     end
+    @search_term_1 = search_term
   end  
 
   def load_tweets_2(search_term)
@@ -31,11 +32,12 @@ class ApplicationController < ActionController::Base
       config.consumer_key = Rails.application.secrets.consumer_key
       config.consumer_secret = Rails.application.secrets.consumer_secret
     end
-    if client.search(search_term + ' nonprofit', result_type: "popular", lang: 'en').any?
-      @tweets_2 = client.search(search_term, result_type: "popular", lang: 'en').take(15)
+    if client.search("#{search_term} OR charity", result_type: "popular", lang: 'en').any?
+      @tweets_2 = client.search("#{search_term} OR charity", result_type: "popular", lang: 'en').take(15)
     else
-      @tweets_2 = client.search(search_term, result_type: "recent", lang: 'en').take(15)
+      @tweets_2 = client.search("#{search_term} OR charity", result_type: "recent", lang: 'en').take(15)
     end
+    @search_term_2 = search_term
   end
 
   def load_tweets_3(search_term)
@@ -43,11 +45,12 @@ class ApplicationController < ActionController::Base
       config.consumer_key = Rails.application.secrets.consumer_key
       config.consumer_secret = Rails.application.secrets.consumer_secret
     end
-    if client.search(search_term, result_type: "popular").any?
-      @tweets_3 = client.search(search_term, result_type: "popular", lang: 'en').take(15)
+    if client.search("#{search_term} OR charity", result_type: "popular").any?
+      @tweets_3 = client.search("#{search_term} OR charity", result_type: "popular", lang: 'en').take(15)
     else
-      @tweets_3 = client.search(search_term, result_type: "recent", lang: 'en').take(15)
+      @tweets_3 = client.search("#{search_term} OR charity", result_type: "recent", lang: 'en').take(15)
     end
+    @search_term_3 = search_term
   end  
 
   def my_tweets
@@ -58,6 +61,17 @@ class ApplicationController < ActionController::Base
       config.access_token_secret = Rails.application.secrets.access_token_secret
     end
      @my_tweets = twitter_accessor.client.user_timeline.take(15)
+  end
+
+  def get_org(search_term)
+      auth = {:username => Rails.application.secrets.guidestar_username, :password => Rails.application.secrets.guidestar_password }
+
+
+      @orgs = HTTParty.get("https://sandboxdata.guidestar.org/v1/search.json?q=#{search_term}&r=5", :basic_auth => auth )
+      @orgs_list = @orgs["hits"]
+      # respond_to do |format|
+      #     format.json { render json: @orgs_list }
+      # end
   end
   
   private
