@@ -41,19 +41,19 @@ $(function(){
       data[2].forEach(function(tweet){
         $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_3)
       })
-      var $gs_ul_1 = $("#first-guidestar-results");
+      var $gs_ul_1 = $("#first-guidestar-results").append("<h2></h2>").text(data[3]);
       if (data[6] != null){
         data[6].forEach(function(org){
           $("<li></li>").text(org["organization_name"]).appendTo($gs_ul_1)
         })
       }
-      var $gs_ul_2 = $("#second-guidestar-results");
+      var $gs_ul_2 = $("#second-guidestar-results").append("<h2></h2>").text(data[4]);
         if (data[7] != null){
         data[7].forEach(function(org){
           $("<li></li>").text(org["organization_name"]).appendTo($gs_ul_2)
         })        
       } 
-      var $gs_ul_3 = $("#third-guidestar-results");
+      var $gs_ul_3 = $("#third-guidestar-results").append("<h2></h2>").text(data[5]);
       if (data[8] != null){
         data[8].forEach(function(org){
           $("<li></li>").text(org["organization_name"]).appendTo($gs_ul_3)
