@@ -22,19 +22,25 @@ class NytController < ApplicationController
 		end
 
 		des_geo_hash = Hash.new { |h,k| h[k] = [] }
-
 		des_hash.each do |des_facet, article|
-			if des_facet && article[0]['geo_facet'][0] 
-				des_geo_hash[des_facet + " in " + article[0]['geo_facet'][0]] = article
+			if des_facet && article[0]['geo_facet'][0]
+				if article[0]['geo_facet'][0].split.length > 1 
+					des_geo_hash[des_facet.split[0] + " in " + article[0]['geo_facet'][0].split[0] + " " + article[0]['geo_facet'][0].split[1]] = article
+				else
+					des_geo_hash[des_facet.split[0] + " in " + article[0]['geo_facet'][0].split[0]] = article
+				end
 			elsif des_facet && !article[0]['geo_facet'][0]
-				des_geo_hash[des_facet] = article
+				des_geo_hash[des_facet.split[0]] = article
 			elsif !des_facet && article[0]['geo_facet'][0]
-				des_geo_hash[article[0]['geo_facet'][0]] = article
+				if article[0]['geo_facet'][0].split.length > 1 
+					des_geo_hash[article[0]['geo_facet'][0].split[0] + " " + article[0]['geo_facet'][0].split[1]] = article
+				else
+					des_geo_hash[article[0]['geo_facet'][0].split[0]] = article
+				end
 			else
 				# do nothing
 			end
 		end
-
 
 		# Changes the original hash to have the des_facet as they key
 		# and the count of how many articles with that facet as the value
@@ -68,6 +74,25 @@ class NytController < ApplicationController
 		@first_org = get_org(first_cgi)
 		@second_org = get_org(second_cgi)
 		@third_org = get_org(third_cgi)
+
+		if @first_org[0]["organization_name"] == "GuideStar USA, Inc."
+			@first_org = [{"organization_name" => "No results found"}]
+		else 
+			@first_org = get_org(first_cgi)
+		end
+
+		if @second_org[0]["organization_name"] == "GuideStar USA, Inc."
+			@second_org = [{"organization_name" => "No results found"}]
+		else 
+			@second_org = get_org(second_cgi)
+		end
+
+		if @third_org[0]["organization_name"] == "GuideStar USA, Inc."
+			@third_org = [{"organization_name" => "No results found"}]
+		else 
+			@third_org = get_org(third_cgi)
+		end
+			
 		respond_to do |format|
 			format.json { render json: [@tweets_1, @tweets_2, @tweets_3, @search_term_1, @search_term_2, @search_term_3, @first_org, @second_org, @third_org] }
 		end
