@@ -2,10 +2,25 @@ class NytController < ApplicationController
 	require 'HTTParty'
 	require 'uri'
 
+	def user_choice
+		@user_search_term = URI.escape(params['topic'] + ' in ' + params['location'])
+		@tweets_4 = load_tweets(@user_search_term)
+		@user_org = get_org(@user_search_term)
+
+		if @user_org[0]["organization_name"] == "GuideStar USA, Inc."
+			@user_org = [{"organization_name" => "No results found"}]
+		else 
+			@user_org = get_org(@user_search_term)
+		end
+		
+		respond_to do |format|
+			format.json { render json: [@tweets_4, @user_org, @user_search_term] }
+		end
+	end
+
 	def get_article
 		@articles = HTTParty.get("http://api.nytimes.com/svc/news/v3/content/all/world.json?api-key=#{Rails.application.secrets.nyt_newsWire_apiKey}")
-		# @articles["results"][0]['subsection']
-		# @articles["results"][0]['title']
+
 		respond_to do |format|
 			format.json { render json: @articles["results"] }
 		end
@@ -92,7 +107,7 @@ class NytController < ApplicationController
 		else 
 			@third_org = get_org(third_cgi)
 		end
-			
+
 		respond_to do |format|
 			format.json { render json: [@tweets_1, @tweets_2, @tweets_3, @search_term_1, @search_term_2, @search_term_3, @first_org, @second_org, @third_org] }
 		end
