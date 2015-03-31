@@ -4,12 +4,13 @@ class NytController < ApplicationController
 
 	def user_choice
 		# takes user's input from the form
-		@user_search_term = URI.escape(params['topic'] + ' in ' + params['location'])
-		user_search_term = params['topic'] + ' in ' + params['location']
+		@user_search_term = URI.escape(params['topic'] + params['location'])
+		user_search_term = params['topic'] + params['location']
 		# loads tweets with user input
 		@tweets_4 = load_tweets(@user_search_term)
 		# gets guidestar orgs with user input
 		@user_org = get_org(@user_search_term)
+		# binding.pry
 
 		# prevents guidestar from appending default results 
 		if @user_org[0]["organization_name"] == "GuideStar USA, Inc."
@@ -41,16 +42,16 @@ class NytController < ApplicationController
 		des_hash = @articles['results'].group_by do |article|
 			article['des_facet'][0]
 		end
-
+		# binding.pry
 		# Updates hash to have des_fact and geo_facet as key 
 		# and frequency of articles as the value
 		des_geo_hash = Hash.new { |h,k| h[k] = [] }
 		des_hash.each do |des_facet, article|
 			if des_facet && article[0]['geo_facet'][0]
 				if article[0]['geo_facet'][0].split.length > 1 
-					des_geo_hash[des_facet.split[0] + " in " + article[0]['geo_facet'][0].split[0] + " " + article[0]['geo_facet'][0].split[1]] = article
+					des_geo_hash[des_facet.split[0] + " " + article[0]['geo_facet'][0].split[0] + " " + article[0]['geo_facet'][0].split[1]] = article
 				else
-					des_geo_hash[des_facet.split[0] + " in " + article[0]['geo_facet'][0].split[0]] = article
+					des_geo_hash[des_facet.split[0] + " " + article[0]['geo_facet'][0].split[0]] = article
 				end
 			elsif des_facet && !article[0]['geo_facet'][0]
 				des_geo_hash[des_facet.split[0]] = article
@@ -64,7 +65,6 @@ class NytController < ApplicationController
 				# do nothing
 			end
 		end
-
 		# Changes the original hash to have the des_facet as they key
 		# and the count of how many articles with that facet as the value
 		facet_count = Hash.new { |h,k| h[k] = [] }
@@ -104,30 +104,57 @@ class NytController < ApplicationController
 
 		# gets guidestar reults with top nytimes results
 		@first_org = get_org(first_cgi)
+
 		@second_org = get_org(second_cgi)
+
 		@third_org = get_org(third_cgi)
 
 		# prevents guidestar from appending default results when nil
-		if @first_org[0]["organization_name"] == "GuideStar USA, Inc."
+		if @first_org == nil || @first_org[0]["organization_name"] == "GuideStar USA, Inc."
 			@first_org = [{"organization_name" => "No results found"}]
 		else 
 			@first_org = get_org(first_cgi)
 		end
+
+		if @first_org != nil
+			@first_org_details = @first_org.map do |org|
+				get_org_details(org["organization_id"])
+			end
+		end
+
+		# binding.pry
+
+		test_org = @first_org[0]["organization_id"]
+		test_org_details = get_org_details(test_org)
+
 		# prevents guidestar from appending default results when nil
-		if @second_org[0]["organization_name"] == "GuideStar USA, Inc."
+		if @second_org == nil || @second_org[0]["organization_name"] == "GuideStar USA, Inc."
 			@second_org = [{"organization_name" => "No results found"}]
 		else 
 			@second_org = get_org(second_cgi)
 		end
+
+		if @second_org != nil
+			@second_org_details = @second_org.map do |org|
+				get_org_details(org["organization_id"])
+			end
+		end
+
 		# prevents guidestar from appending default results when nil
-		if @third_org[0]["organization_name"] == "GuideStar USA, Inc."
+		if @third_org == nil || @third_org[0]["organization_name"] == "GuideStar USA, Inc."
 			@third_org = [{"organization_name" => "No results found"}]
 		else 
 			@third_org = get_org(third_cgi)
 		end
-
+		
+		if @third_org != nil
+			@third_org_details = @third_org.map do |org|
+				get_org_details(org["organization_id"])
+			end		
+		end
+		
 		respond_to do |format|
-			format.json { render json: [@tweets_1, @tweets_2, @tweets_3, @search_term_1, @search_term_2, @search_term_3, @first_org, @second_org, @third_org] }
+			format.json { render json: [@tweets_1, @tweets_2, @tweets_3, @search_term_1, @search_term_2, @search_term_3, @first_org, @second_org, @third_org, @first_org_details, @second_org_details, @third_org_details] }
 		end
 	end
 
