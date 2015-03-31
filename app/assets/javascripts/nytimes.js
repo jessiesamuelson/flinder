@@ -29,11 +29,11 @@ $(function(){
         success: function(data){
           console.log(data)
 
-          var $ul_4 = $("#twitter-search-result-4").append("<h2></h2>").text(data[2])
+          var $ul_4 = $("#twitter-search-result-4").append("<h2></h2>").text(data[3])
           data[0].forEach(function(tweet){
             $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_4)
           })
-          var $gs_ul_4 = $("#fourth-guidestar-results").append("<h2></h2>").text(data[2]);
+          var $gs_ul_4 = $("#fourth-guidestar-results").append("<h2></h2>").text(data[3]);
           if (data[1] != null){
             data[1].forEach(function(org){
               $("<li></li>").text(org["organization_name"]).appendTo($gs_ul_4)
@@ -52,13 +52,12 @@ $(function(){
   }
   getResults();
 
-
+  // Renders twitter and guidestar results to appropirate uls on page
   $.ajax({
     url: '/nytimes_facet',
     dataType: 'json',
     success: function(data) {
       
-      // console.log(data[0][0].user.screen_name)
       var $ul_1 = $("#twitter-search-result-1").append("<h2></h2>").text(data[3])
       data[0].forEach(function(tweet){
         $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_1)
