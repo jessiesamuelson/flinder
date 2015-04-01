@@ -19,23 +19,22 @@
 
 <div id="user-click"></div>
 
-<h1>My Twitter Search result: </h1>
-<ul id="my-twitter-search-result">
-</ul>
+<div id="my-search" class="results">
+	<h1>My Twitter Search result: </h1>
+	<ul id="my-twitter-search-result"></ul>
 
-<h1>Topic Twitter Search result: </h1>
-<ul id="topic-twitter-search-result">
-</ul>
+	<h1>My Guidestar search result:</h1>
+	<ul id="my-guidestar-results"></ul>
+</div>
 
-<h1>My Guidestar search result:</h1>
-<ul id="my-guidestar-results"></ul>
+<div id="topic-search" class="results">
+	<h1>Topic Twitter Search result: </h1>
+	<ul id="topic-twitter-search-result">
+	</ul>
 
-<h1>Topic Guidestar search result:</h1>
-<ul id="topic-guidestar-results"></ul>
-
-<% if @user.oauth_token %>
-  <%= render 'shared/tweets' %>
-<% end %>
+	<h1>Topic Guidestar search result:</h1>
+	<ul id="topic-guidestar-results"></ul>
+</div>
 
 
 <% if @user == current_user %>

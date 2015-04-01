@@ -89,49 +89,51 @@ $(function(){
   function renderResult(article){
     var $topicOfChoice;
     
-    if (article['des_facet'] != '' && article['geo_facet'] != '') {
-      if (article['geo_facet'].length > 1) {
-        $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0] + ' ' + article['geo_facet'][1];
-      } else {
-         $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0];
-      }
-    } else if (article['des_facet'] != '' && article['geo_facet'] == '') {
-      $topicOfChoice = article['des_facet'][0].split(' ')[0];
-    } else if (article['des_facet'] == '' && article['geo_facet'] != '') {
-      if (article['geo_facet'].length > 1) {
-        $topicOfChoice = article['geo_facet'][0] + ' ' + article['geo_facet'][1];
-      } else {
-       $topicOfChoice = article['geo_facet'][0];
-      }
-    };
-
     // if (article['des_facet'] != '' && article['geo_facet'] != '') {
-    //   if (article['des_facet'].length > 1) {
-    //     if (article['geo_facet'].length > 1) {
-    //       $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['des_facet'][0].split(' ')[1] + ' ' + article['geo_facet'][0] + ' ' + article['geo_facet'][1];
-    //     } else {
-    //       $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['des_facet'][0].split(' ')[1] + ' ' + article['geo_facet'][0];
-    //     }
+    //   if (article['geo_facet'].length > 1) {
+    //     $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0] + ' ' + article['geo_facet'][1];
     //   } else {
-    //     if (article['geo_facet'].length > 1) {
-    //       $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0] + ' ' + article['geo_facet'][1];
-    //     } else {
-    //       $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0];
-    //     }
+    //      $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0];
     //   }
     // } else if (article['des_facet'] != '' && article['geo_facet'] == '') {
-    //   if (article['des_facet'].length > 1) {
-    //     $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['des_facet'][0].split(' ')[1]
-    //   } else {
-    //     $topicOfChoice = article['des_facet'][0].split(' ')[0]
-    //   }
+    //   $topicOfChoice = article['des_facet'][0].split(' ')[0];
     // } else if (article['des_facet'] == '' && article['geo_facet'] != '') {
     //   if (article['geo_facet'].length > 1) {
     //     $topicOfChoice = article['geo_facet'][0] + ' ' + article['geo_facet'][1];
     //   } else {
-    //     $topicOfChoice = article['geo_facet'][0];
+    //    $topicOfChoice = article['geo_facet'][0];
     //   }
-    // } else {};
+    // }; 
+    console.log(article['des_facet']);
+    console.log(article['geo_facet']);
+
+    if (article['des_facet'] != '' && article['geo_facet'] != '') {
+      if (article['des_facet'][0].split(' ').length > 1) {
+        if (article['geo_facet'][0].split(' ').length > 1) {
+          $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['des_facet'][0].split(' ')[1] + ' ' + article['geo_facet'][0] + ' ' + article['geo_facet'][1];
+        } else {
+          $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['des_facet'][0].split(' ')[1] + ' ' + article['geo_facet'][0];
+        }
+      } else {
+        if (article['geo_facet'][0].split(' ').length > 1) {
+          $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0] + ' ' + article['geo_facet'][1];
+        } else {
+          $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0];
+        }
+      }
+    } else if (article['des_facet'] != '' && article['geo_facet'] == '') {
+      if (article['des_facet'][0].split(' ').length > 1) {
+        $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['des_facet'][0].split(' ')[1]
+      } else {
+        $topicOfChoice = article['des_facet'][0].split(' ')[0]
+      }
+    } else if (article['des_facet'] == '' && article['geo_facet'] != '') {
+      if (article['geo_facet'][0].split(' ').length > 1) {
+        $topicOfChoice = article['geo_facet'][0] + ' ' + article['geo_facet'][1];
+      } else {
+        $topicOfChoice = article['geo_facet'][0];
+      }
+    } else {};
 
     console.log($topicOfChoice);
 
