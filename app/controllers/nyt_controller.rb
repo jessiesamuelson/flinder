@@ -11,7 +11,6 @@ class NytController < ApplicationController
 		@tweets_4 = load_tweets(@user_search_term)
 		# gets guidestar orgs with user input
 		@user_org = get_org(@user_search_term)
-		# binding.pry
 
 		# prevents guidestar from appending default results 
 		if @user_org[0]["organization_name"] == "GuideStar USA, Inc."
@@ -32,7 +31,6 @@ class NytController < ApplicationController
 			end
 		end
 		
-		
 		respond_to do |format|
 			format.json { render json: [@tweets_4, @user_org, @user_search_term, user_search_term, @user_org_details] }
 		end
@@ -46,8 +44,6 @@ class NytController < ApplicationController
 		@tweets_5 = load_tweets(@user_choice)
 		@user_choice_org = get_org(user_cgi_choice)
 
-		binding.pry
-		
 		# prevents guidestar from appending default results 
 		if @user_choice_org[0]["organization_name"] == "GuideStar USA, Inc."
 			@user_choice_org = [{"organization_name" => "No results found"}]
@@ -65,6 +61,9 @@ class NytController < ApplicationController
 			@user_choice_org_details = @user_choice_org.map do |org|
 				get_org_details(org["organization_id"])
 			end
+		end
+		respond_to do |format|
+			format.json { render json: [@tweets_5, @user_choice_org, @user_choice, @user_choice_org_details] }
 		end
 
 	end
@@ -87,7 +86,7 @@ class NytController < ApplicationController
 		des_hash = @articles['results'].group_by do |article|
 			article['des_facet'][0]
 		end
-		# binding.pry
+		
 		# Updates hash to have des_fact and geo_facet as key 
 		# and frequency of articles as the value
 		des_geo_hash = Hash.new { |h,k| h[k] = [] }
@@ -166,11 +165,6 @@ class NytController < ApplicationController
 				get_org_details(org["organization_id"])
 			end
 		end
-
-		# binding.pry
-
-		# test_org = @first_org[0]["organization_id"]
-		# test_org_details = get_org_details(test_org)
 
 		# prevents guidestar from appending default results when nil
 		if @second_org == nil || @second_org[0]["organization_name"] == "GuideStar USA, Inc."
