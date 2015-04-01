@@ -1,6 +1,8 @@
 console.log('nytimes.js running');
 
 $(function(){
+  var $formDiv = $('#user-click');
+
   // Pulls in results from NYTimes API through NYTimes controller
   function getResults() {
 
@@ -9,7 +11,7 @@ $(function(){
       dataType: 'json',
       success: function(data) {
         data.forEach(function(article){
-          renderResults(article)
+          renderResult(article)
         })
       }
     });
@@ -48,10 +50,42 @@ $(function(){
       })
     })
   };
+  function getUserClick() {
+    $formDiv.on('submit', 'form', function(e){
+      e.preventDefault();
+      $.ajax({
+        url: '/user_click',
+        dataType: 'json',
+        data: {
+          topic: this.elements.topic.value
+        },
+        success: function(data){
+          console.log(data);
+          var $ul_5 = $("#twitter-search-result-5").append("<h2></h2>").text(data[2])
+          data[0].forEach(function(tweet){
+            $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_5)
+          })
+          var $gs_ul_5 = $("#fifth-guidestar-results").append("<h2></h2>").text(data[2]);
+          if (data[1] != null){
+            data[1].forEach(function(org){
+              $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul_5).append($("<div></div>").text(org["mission"]))
+            })        
+          }
+          if (data[3] != null){
+            data[3].forEach(function(org){
+            $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
+            })
+          } 
+        }
+      })
+    })
+  };
+
   getUserChoice();
+  getUserClick();
   
    // Renders results of NYTimes API pull
-  function renderResults(article){
+  function renderResult(article){
     var $topicOfChoice;
     
     if (article['des_facet'] != '' && article['geo_facet'] != '') {
@@ -70,12 +104,44 @@ $(function(){
       }
     };
 
+    // if (article['des_facet'] != '' && article['geo_facet'] != '') {
+    //   if (article['des_facet'].length > 1) {
+    //     if (article['geo_facet'].length > 1) {
+    //       $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['des_facet'][0].split(' ')[1] + ' ' + article['geo_facet'][0] + ' ' + article['geo_facet'][1];
+    //     } else {
+    //       $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['des_facet'][0].split(' ')[1] + ' ' + article['geo_facet'][0];
+    //     }
+    //   } else {
+    //     if (article['geo_facet'].length > 1) {
+    //       $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0] + ' ' + article['geo_facet'][1];
+    //     } else {
+    //       $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0];
+    //     }
+    //   }
+    // } else if (article['des_facet'] != '' && article['geo_facet'] == '') {
+    //   if (article['des_facet'].length > 1) {
+    //     $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['des_facet'][0].split(' ')[1]
+    //   } else {
+    //     $topicOfChoice = article['des_facet'][0].split(' ')[0]
+    //   }
+    // } else if (article['des_facet'] == '' && article['geo_facet'] != '') {
+    //   if (article['geo_facet'].length > 1) {
+    //     $topicOfChoice = article['geo_facet'][0] + ' ' + article['geo_facet'][1];
+    //   } else {
+    //     $topicOfChoice = article['geo_facet'][0];
+    //   }
+    // } else {};
+
     console.log($topicOfChoice);
 
-    var $ul = $('#nytimes-results');
-    var $form = $("#user-click")
-    $("<input type='submit'>").attr('value', $topicOfChoice).attr('name','topic').text(article['des_facet'] + ' in ' + article['geo_facet']).appendTo($form);
+    var $form = $("<form>").attr("action", "/user_click").attr("method", "post");
+    var $dataInput = $("<input type='hidden'>").attr('value', $topicOfChoice).attr('name','topic');
+    var $submitInput = $("<input type='submit'>").attr('value', article['des_facet'] + ' in ' + article['geo_facet']);
+
+    $form.append($dataInput).append($submitInput);
+    $formDiv.append($form);
   };
+
   getResults();
 
 // data = [
@@ -89,9 +155,6 @@ $(function(){
     url: '/nytimes_facet',
     dataType: 'json',
     success: function(data) {
-      console.log(data[9])
-      console.log(data[10])
-      console.log(data[11])
       var $ul_1 = $("#twitter-search-result-1").append("<h2></h2>").text(data[3])
       data[0].forEach(function(tweet){
         $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_1)
