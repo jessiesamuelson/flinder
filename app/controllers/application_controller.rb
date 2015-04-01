@@ -40,9 +40,16 @@ class ApplicationController < ActionController::Base
       auth = {:username => Rails.application.secrets.guidestar_username, :password => Rails.application.secrets.guidestar_password }
 
 
-      # @orgs = HTTParty.get("https://#{Rails.application.secrets.guidestar_searchKey}sandboxdata.guidestar.org/v1/search.json?q=#{search_term}&r=5", :basic_auth => auth )
-      @orgs = HTTParty.get("https://sandboxdata.guidestar.org/v1/search.json?q=#{search_term}&r=5", :basic_auth => auth )
+      @orgs = HTTParty.get("https://#{Rails.application.secrets.guidestar_searchKey}@sandboxdata.guidestar.org/v1/search.json?q=#{search_term}&r=5", :basic_auth => auth )
+      # @orgs = HTTParty.get("https://sandboxdata.guidestar.org/v1/search.json?q=#{search_term}&r=5", :basic_auth => auth )
       @orgs_list = @orgs["hits"]
+  end
+
+  def get_org_details(org_id)
+    auth = {:username => Rails.application.secrets.guidestar_username, :password => Rails.application.secrets.guidestar_password }
+
+
+      @orgs = HTTParty.get("https://#{Rails.application.secrets.guidestar_detailsKey}@sandboxdata.guidestar.org/v1/detail/#{org_id}.json", :basic_auth => auth )
   end
   
   private
