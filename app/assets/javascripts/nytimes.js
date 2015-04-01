@@ -31,14 +31,14 @@ $(function(){
         success: function(data){
           console.log(data)
 
-          var $ul_4 = $("#twitter-search-result-4").append("<h2></h2>").text(data[3])
+          var $tw_ul = $("#my-twitter-search-result").append("<h2></h2>").text(data[3])
           data[0].forEach(function(tweet){
-            $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_4)
+            $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($tw_ul)
           })
-          var $gs_ul_4 = $("#fourth-guidestar-results").append("<h2></h2>").text(data[3]);
+          var $gs_ul = $("#my-guidestar-results").append("<h2></h2>").text(data[3]);
           if (data[1] != null){
             data[1].forEach(function(org){
-              $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul_4).append($("<div></div>").text(org["mission"]))
+              $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul).append($("<div></div>").text(org["mission"]))
             })        
           }
           if (data[4] != null){
@@ -50,6 +50,7 @@ $(function(){
       })
     })
   };
+
   function getUserClick() {
     $formDiv.on('submit', 'form', function(e){
       e.preventDefault();
@@ -61,14 +62,14 @@ $(function(){
         },
         success: function(data){
           console.log(data);
-          var $ul_5 = $("#twitter-search-result-5").append("<h2></h2>").text(data[2])
+          var $tw_ul = $("#topic-twitter-search-result").append("<h2></h2>").text(data[2])
           data[0].forEach(function(tweet){
-            $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_5)
+            $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($tw_ul)
           })
-          var $gs_ul_5 = $("#fifth-guidestar-results").append("<h2></h2>").text(data[2]);
+          var $gs_ul = $("#topic-guidestar-results").append("<h2></h2>").text(data[2]);
           if (data[1] != null){
             data[1].forEach(function(org){
-              $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul_5).append($("<div></div>").text(org["mission"]))
+              $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul).append($("<div></div>").text(org["mission"]))
             })        
           }
           if (data[3] != null){
@@ -150,60 +151,4 @@ $(function(){
 // @first_org, @second_org, @third_org, 
 // @first_org_details, @second_org_details, @third_org_details]
 
-  // Renders twitter and guidestar results to appropirate uls on page
-  $.ajax({
-    url: '/nytimes_facet',
-    dataType: 'json',
-    success: function(data) {
-      var $ul_1 = $("#twitter-search-result-1").append("<h2></h2>").text(data[3])
-      data[0].forEach(function(tweet){
-        $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_1)
-      })
-      var $ul_2 = $("#twitter-search-result-2").append("<h2></h2>").text(data[4])
-      data[1].forEach(function(tweet){
-        $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_2)
-      })
-      var $ul_3 = $("#twitter-search-result-3").append("<h2></h2>").text(data[5])
-      data[2].forEach(function(tweet){
-        $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($ul_3)
-      })
-
-
-      var $gs_ul_1 = $("#first-guidestar-results").append("<h2></h2>").text(data[3]);
-      if (data[6] != null){
-        data[6].forEach(function(org){
-          $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul_1).append($("<div></div>").text(org["mission"]))
-        })
-      }
-      if (data[9] != null){
-        data[9].forEach(function(org){
-        $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
-        })
-      }
-
-      var $gs_ul_2 = $("#second-guidestar-results").append("<h2></h2>").text(data[4]);
-        if (data[7] != null){
-        data[7].forEach(function(org){
-          $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul_2).append($("<div></div>").text(org["mission"]))
-        })        
-      }
-      if (data[10] != null){
-        data[10].forEach(function(org){
-        $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
-        })
-      }
-
-      var $gs_ul_3 = $("#third-guidestar-results").append("<h2></h2>").text(data[5]);
-      if (data[8] != null){
-        data[8].forEach(function(org){
-          $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul_3).append($("<div></div>").text(org["mission"]))
-        })        
-      }
-      if (data[11] != null){
-        data[11].forEach(function(org){
-        $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
-        })
-      }
-    }
-  })
-})
+});

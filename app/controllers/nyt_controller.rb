@@ -13,7 +13,7 @@ class NytController < ApplicationController
 		@user_org = get_org(@user_search_term)
 
 		# prevents guidestar from appending default results 
-		if @user_org[0]["organization_name"] == "GuideStar USA, Inc."
+		if @user_org == nil || @user_org[0]["organization_name"] == "GuideStar USA, Inc."
 			@user_org = [{"organization_name" => "No results found"}]
 		else 
 			@user_org = get_org(@user_search_term)
