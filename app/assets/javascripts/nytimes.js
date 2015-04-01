@@ -36,8 +36,13 @@ $(function(){
           var $gs_ul_4 = $("#fourth-guidestar-results").append("<h2></h2>").text(data[3]);
           if (data[1] != null){
             data[1].forEach(function(org){
-              $("<li></li>").text(org["organization_name"]).appendTo($gs_ul_4)
+              $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul_4).append($("<div></div>").text(org["mission"]))
             })        
+          }
+          if (data[4] != null){
+            data[4].forEach(function(org){
+            $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
+            })
           } 
         }
       })
@@ -88,20 +93,32 @@ $(function(){
       }
       if (data[9] != null){
         data[9].forEach(function(org){
-        $('#organization-' + org['organization_id']).append($("<div></div>").text("I found you"))
+        $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
         })
       }
+
       var $gs_ul_2 = $("#second-guidestar-results").append("<h2></h2>").text(data[4]);
         if (data[7] != null){
         data[7].forEach(function(org){
           $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul_2).append($("<div></div>").text(org["mission"]))
         })        
-      } 
+      }
+      if (data[10] != null){
+        data[10].forEach(function(org){
+        $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
+        })
+      }
+
       var $gs_ul_3 = $("#third-guidestar-results").append("<h2></h2>").text(data[5]);
       if (data[8] != null){
         data[8].forEach(function(org){
           $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul_3).append($("<div></div>").text(org["mission"]))
         })        
+      }
+      if (data[11] != null){
+        data[11].forEach(function(org){
+        $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
+        })
       }
     }
   })

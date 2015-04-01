@@ -18,9 +18,22 @@ class NytController < ApplicationController
 		else 
 			@user_org = get_org(@user_search_term)
 		end
+
+		if @user_org == nil || @user_org[0]["organization_name"] == "GuideStar USA, Inc."
+			@user_org = [{"organization_name" => "No results found"}]
+		else 
+			@user_org = get_org(@user_search_term)
+		end
+
+		if @user_org != nil
+			@user_org_details = @user_org.map do |org|
+				get_org_details(org["organization_id"])
+			end
+		end
+		
 		
 		respond_to do |format|
-			format.json { render json: [@tweets_4, @user_org, @user_search_term, user_search_term] }
+			format.json { render json: [@tweets_4, @user_org, @user_search_term, user_search_term, @user_org_details] }
 		end
 	end
 
@@ -124,8 +137,8 @@ class NytController < ApplicationController
 
 		# binding.pry
 
-		test_org = @first_org[0]["organization_id"]
-		test_org_details = get_org_details(test_org)
+		# test_org = @first_org[0]["organization_id"]
+		# test_org_details = get_org_details(test_org)
 
 		# prevents guidestar from appending default results when nil
 		if @second_org == nil || @second_org[0]["organization_name"] == "GuideStar USA, Inc."
