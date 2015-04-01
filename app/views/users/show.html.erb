@@ -17,6 +17,8 @@
 <h1>Times search results:</h1>
 <ul id="nytimes-results"></ul>
 
+<form id="user-click" action="/user_click" method="POST"></form>
+
 <h1>Twitter Search result 1: </h1>
 <ul id="twitter-search-result-1">
 </ul>
@@ -33,6 +35,10 @@
 <ul id="twitter-search-result-4">
 </ul>
 
+<h1>My Twitter Search result 5: </h1>
+<ul id="twitter-search-result-5">
+</ul>
+
 <h1>Guidestar search result 1:</h1>
 <ul id="first-guidestar-results"></ul>
 
@@ -44,6 +50,9 @@
 
 <h1>My Guidestar search result 4:</h1>
 <ul id="fourth-guidestar-results"></ul>
+
+<h1>My Guidestar search result 5:</h1>
+<ul id="fifth-guidestar-results"></ul>
 
 <% if @user.oauth_token %>
   <%= render 'shared/tweets' %>

@@ -50,11 +50,32 @@ $(function(){
   };
   getUserChoice();
   
-  // Renders results of NYTimes API pull
+   // Renders results of NYTimes API pull
   function renderResults(article){
+    var $topicOfChoice;
+    
+    if (article['des_facet'] != '' && article['geo_facet'] != '') {
+      if (article['geo_facet'].length > 1) {
+        $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0] + ' ' + article['geo_facet'][1];
+      } else {
+         $topicOfChoice = article['des_facet'][0].split(' ')[0] + ' ' + article['geo_facet'][0];
+      }
+    } else if (article['des_facet'] != '' && article['geo_facet'] == '') {
+      $topicOfChoice = article['des_facet'][0].split(' ')[0];
+    } else if (article['des_facet'] == '' && article['geo_facet'] != '') {
+      if (article['geo_facet'].length > 1) {
+        $topicOfChoice = article['geo_facet'][0] + ' ' + article['geo_facet'][1];
+      } else {
+       $topicOfChoice = article['geo_facet'][0];
+      }
+    };
+
+    console.log($topicOfChoice);
+
     var $ul = $('#nytimes-results');
-    $("<li></li>").text(article['des_facet'] + ' in ' + article['geo_facet']).appendTo($ul);
-  }
+    var $form = $("#user-click")
+    $("<input type='submit'>").attr('value', $topicOfChoice).attr('name','topic').text(article['des_facet'] + ' in ' + article['geo_facet']).appendTo($form);
+  };
   getResults();
 
 // data = [

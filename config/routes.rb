@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   post '/user_choice', to: 'nyt#user_choice'
   get '/user_choice', to: 'nyt#user_choice'
 
+  # User nytimes cliked topic for tweets & guidestar 
+  post '/user_click', to: 'nyt#user_click'
+  get '/user_click', to: 'nyt#user_click'
+
   # Guidestair API request
   get '/guidestar_fetch', to: 'guidestar#get_org'
 

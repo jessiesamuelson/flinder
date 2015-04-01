@@ -2,6 +2,7 @@ class NytController < ApplicationController
 	require 'HTTParty'
 	require 'uri'
 
+	# User manually inputs a topic of choice
 	def user_choice
 		# takes user's input from the form
 		@user_search_term = URI.escape(params['topic'] + params['location'])
@@ -35,6 +36,37 @@ class NytController < ApplicationController
 		respond_to do |format|
 			format.json { render json: [@tweets_4, @user_org, @user_search_term, user_search_term, @user_org_details] }
 		end
+	end
+
+	# User picks NYT topic from top stories to display tweets and organizations
+	def user_click
+		@user_choice = params['topic']
+		user_cgi_choice = URI.escape(params['topic'])
+
+		@tweets_5 = load_tweets(@user_choice)
+		@user_choice_org = get_org(user_cgi_choice)
+
+		binding.pry
+		
+		# prevents guidestar from appending default results 
+		if @user_choice_org[0]["organization_name"] == "GuideStar USA, Inc."
+			@user_choice_org = [{"organization_name" => "No results found"}]
+		else 
+			@user_choice_org = get_org(user_cgi_choice)
+		end
+
+		if @user_choice_org == nil || @user_choice_org[0]["organization_name"] == "GuideStar USA, Inc."
+			@user_choice_org = [{"organization_name" => "No results found"}]
+		else 
+			@user_choice_org = get_org(user_cgi_choice)
+		end
+
+		if @user_choice_org != nil
+			@user_choice_org_details = @user_choice_org.map do |org|
+				get_org_details(org["organization_id"])
+			end
+		end
+
 	end
 
 	def get_article
