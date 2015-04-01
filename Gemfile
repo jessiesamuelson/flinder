@@ -41,6 +41,8 @@ gem 'twitter_oauth'
 # HTTParty
 gem 'httparty'
 
+# User Bourbon for styling
+gem 'bourbon'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
