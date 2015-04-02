@@ -1,5 +1,6 @@
+require "httparty"
+
 class ApplicationController < ActionController::Base
-  require "HTTParty"
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
   helper_method :current_user
