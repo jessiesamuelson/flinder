@@ -8,8 +8,9 @@
 </head>
 <body>
 
-<%= current_user ? current_user.name : (link_to 'Log In', login_path) %>
-<%= link_to 'Log Out', logout_path if current_user %>
+<!-- < %= current_user ? current_user.name : (link_to 'Log In', login_path) %>
+< %= link_to 'Log Out', logout_path if current_user %> -->
+
 <%= yield %>
 
 </body>
