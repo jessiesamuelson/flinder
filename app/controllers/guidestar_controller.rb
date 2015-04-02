@@ -1,5 +1,6 @@
+# require 'httparty'
+
 class GuidestarController < ApplicationController
-  # require 'HTTParty'
 
   # def get_org(search_term)
   #     auth = {:username => Rails.application.secrets.guidestar_username, :password => Rails.application.secrets.guidestar_password }
