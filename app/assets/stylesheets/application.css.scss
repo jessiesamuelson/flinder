@@ -17,14 +17,23 @@
 @import "neat-helpers";
 
 #my-search {
-	@include outer-container(100%);
+	@include outer-container(1000px);
 	
-	#my-twitter-search-result {
+	.search-result {
 		@include span-columns(6);
-		float: left;
+		/*padding: 30px;*/
 	}
-	#my-guidestar-results {
+}
+
+#topic-search {
+	@include outer-container(1000px);
+	
+	.click-result {
 		@include span-columns(6);
-		float: left;
+		/*padding: 30px;*/
 	}
+}
+
+#times {
+	@include outer-container(1000px);
 }

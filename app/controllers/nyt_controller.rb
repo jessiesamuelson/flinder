@@ -5,8 +5,8 @@ class NytController < ApplicationController
 	# User manually inputs a topic of choice
 	def user_choice
 		# takes user's input from the form
-		@user_search_term = URI.escape(params['topic'] + params['location'])
-		user_search_term = params['topic'] + params['location']
+		@user_search_term = URI.escape(params['topic'] + " " + params['location'])
+		user_search_term = params['topic'] + " " +  params['location']
 		# loads tweets with user input
 		@tweets_4 = load_tweets(@user_search_term)
 		# gets guidestar orgs with user input

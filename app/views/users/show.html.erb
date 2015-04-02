@@ -13,29 +13,37 @@
 	<input type="submit" value="Search">
 </form>
 
+<div id="times">
+	<h1>Times search result:</h1>
+	<ul id="nytimes-results"></ul>
 
-<h1>Times search result:</h1>
-<ul id="nytimes-results"></ul>
+	<div id="user-click"></div>
+</div>
 
-<div id="user-click"></div>
 
 <div id="my-search" class="results">
-	<h1>My Twitter Search result: </h1>
-	<ul id="my-twitter-search-result"></ul>
+	<div class="search-result">
+		<h1>My Twitter Search result: </h1>
+		<ul id="my-twitter-search-result"></ul>
+	</div>
 
-	<h1>My Guidestar search result:</h1>
-	<ul id="my-guidestar-results"></ul>
+	<div class="search-result">
+		<h1>My Guidestar search result:</h1>
+		<ul id="my-guidestar-results"></ul>
+	</div>
 </div>
 
 <div id="topic-search" class="results">
-	<h1>Topic Twitter Search result: </h1>
-	<ul id="topic-twitter-search-result">
-	</ul>
-
-	<h1>Topic Guidestar search result:</h1>
-	<ul id="topic-guidestar-results"></ul>
+	<div class="click-result">
+		<h1>Topic Twitter Search result: </h1>
+		<ul id="topic-twitter-search-result">
+		</ul>
+	</div>
+	<div class="click-result">
+		<h1>Topic Guidestar search result:</h1>
+		<ul id="topic-guidestar-results"></ul>
+	</div>	
 </div>
-
 
 <% if @user == current_user %>
 	<%= link_to 'Edit', edit_user_path(@user) %> |
