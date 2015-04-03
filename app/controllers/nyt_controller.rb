@@ -1,6 +1,6 @@
+require 'httparty'
+require 'uri'
 class NytController < ApplicationController
-	require 'HTTParty'
-	require 'uri'
 
 	# User manually inputs a topic of choice
 	def user_choice
