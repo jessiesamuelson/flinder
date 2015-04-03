@@ -45,6 +45,9 @@ gem 'httparty'
 gem 'bourbon'
 gem 'neat'
 
+#  Heroku Gem
+# gem 'heroku_secrets'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
