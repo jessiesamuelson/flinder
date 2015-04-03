@@ -46,7 +46,7 @@ gem 'bourbon'
 gem 'neat'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
   gem 'rack-cors', :require => 'rack/cors'
 # Use Capistrano for deployment
