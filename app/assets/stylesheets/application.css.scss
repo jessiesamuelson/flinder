@@ -29,7 +29,8 @@ $flinderLogo: #C7D353;
 }
 
 input[type='text'] ,
-input[type='submit'] {
+input[type='submit'],
+form {
   border:none;
   margin:0;
   padding:0;
@@ -172,14 +173,22 @@ body {
 
 .nyt-topic {
 	@include span-columns(3);
+
+  .nytimes-results {
+    height: 600px;
+  }
 }
 
 .nyt-topic-btn {
-	display:inline;
-	margin:5px;
-	padding:10px;
-	background-color:#FFF;
-	border-radius: 5px;
+  width: 250px;
+  height: 50px;
+  margin: 5px;
+  white-space: normal;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: rgba(233, 218, 252, 0.3);
+  color: $flinderBG;
 }
 
 h1 {
