@@ -18,49 +18,135 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:300,700);
 
 $flinderBG: #554F5C;
-$flinderLogo: #C7D353;
 $flinderFG: #6C6575;
+$flinderLogo: #C7D353;
+
+* {
+  margin:0;
+  padding:0;
+  font-family:inherit;
+  border: none;
+}
+
+input[type='text'] ,
+input[type='submit'] {
+  border:none;
+  margin:0;
+  padding:0;
+}
 
 body {
-	font-family: 'Roboto';
+  font-family: 'Roboto';
   background-color: $flinderBG;
 }
 
+
 .main-nav {
   width: 100%;
-  margin-top: -30px;
-  position: absolute;
+  height: 30px;
+  background-color: $flinderFG;
 
   .upper-nav {
-    height: 30px;
     list-style: none;
-    background-color: $flinderFG;
+    float:right;
+
+    .nav-links {
+      float:left;
+    }
+
+    li + li {
+      margin-left: 10px;
+    }
 
     .nav-link {
+      height:50%;
       display: inline;
       position: relative;
+      right:20px;
+      top:5px;
 
-      li a {
-        position: relative;
-        right: 80%;
+      a {
+        font-size:14px;
+        color: #FFF;
+        text-decoration: none;
+
+        &:hover{
+          color: $flinderLogo;
+          transition: .05s ease-in-out;
+        }
       }
     }
   }
 }
 
+.nav-logo img {
+  float:left;
+}
+
 .logo {
-  position:relative;
-  width: 75%;
-  height: 100px;
-  margin-left: 10%;
+  @include outer-container(1000px);
+  height: 150px;
   border-bottom: 1px solid $flinderFG;
 
   img {
     position:relative;
     margin:50px;
-    margin-left:48%;
+    margin-left:45%;
     width:50px;
-    bottom:25%;
+  }
+}
+
+.search-section{
+  @include outer-container(1000px);
+
+  .search-form {
+    @include span-columns(12);
+    margin-top: 50px;
+    padding-bottom: 10px;
+
+    #user-search label {
+      margin-bottom:15px;
+      font-weight: 700;
+      font-size: 2em;
+      color: #FFF;
+    }
+
+    input[type='text'] {
+      width:100%;
+      height:40px;
+      margin-bottom: 2px;
+      padding: 10px;
+      color: $flinderFG;
+      font-weight: 700;
+      font-size: 18px;
+
+      &::-webkit-input-placeholder {
+        color: $flinderFG;
+        opacity: 0.5;
+        font-weight: 700;
+        font-size: 18px;
+      }
+    }
+
+    input:focus {
+      outline: none;
+      background-color: rgba(233, 218, 252, 0.5);
+      color: #FFF;
+    }
+
+    input[type='submit'] {
+      padding: 15px;
+      margin-top: 2px;
+      font-weight: 700;
+      font-size: 18px;
+      background-color: rgba(233, 218, 252, 0.3);
+      color: $flinderBG;
+
+      &:hover {
+        background-color: $flinderFG;
+        color: rgba(233, 218, 252, 0.3);
+      }
+    }
   }
 }
 
@@ -69,7 +155,6 @@ body {
   
   .search-result {
     @include span-columns(6);
-    /*padding: 30px;*/
   }
 }
 
@@ -96,4 +181,9 @@ body {
 	background-color:#FFF;
 	border-radius: 5px;
 }
+
+
+
+
+
 

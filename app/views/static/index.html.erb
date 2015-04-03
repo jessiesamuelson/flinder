@@ -1,22 +1,24 @@
 <p id="notice"><%= notice %></p>
 <%= render 'static/nav' %>
 
-<div class="search-form">
-	<form id="user-search" action="/user_choice" method="POST">
-		<label>Enter Your Own Topic to Search For</label>
-		<br>
-		<input type="text" name="topic" placeholder="Topic of Interest"><br>
-		<input type="text" name="location" placeholder="Geographic Location">
-		<br>
-		<input type="submit" value="Search">
-	</form>
-</div>
+<div class="search-section">
+	<div class="search-form">
+		<form id="user-search" action="/user_choice" method="POST">
+			<label>Enter Your Own Topic to Search For</label>
+			<br>
+			<input type="text" name="topic" placeholder="Topic of Interest"><br>
+			<input type="text" name="location" placeholder="Geographic Location">
+			<br>
+			<input type="submit" value="Search">
+		</form>
+	</div>
 
-<div id="times">
-	<h1>Times search result:</h1>
-	<ul id="nytimes-results"></ul>
+	<div id="times">
+		<h1>Times search result:</h1>
+		<ul id="nytimes-results"></ul>
 
-	<div id="user-click"></div>
+		<div id="user-click"></div>
+	</div>
 </div>
 
 <div id="my-search" class="results">
