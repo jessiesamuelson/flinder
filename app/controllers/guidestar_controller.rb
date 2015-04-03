@@ -1,5 +1,4 @@
 # require 'httparty'
-
 class GuidestarController < ApplicationController
 
   # def get_org(search_term)

@@ -29,7 +29,7 @@ $(function(){
         dataType: 'json',
         data: $(this).serialize(),
         success: function(data){
-          console.log(data)
+          console.log(data[0])
 
           var $tw_ul = $("#my-twitter-search-result").append("<h2></h2>").text(data[3])
           data[0].forEach(function(tweet){
@@ -61,7 +61,7 @@ $(function(){
           topic: this.elements.topic.value
         },
         success: function(data){
-          console.log(data);
+          console.log(data[0]);
           var $tw_ul = $("#topic-twitter-search-result").append("<h2></h2>").text(data[2])
           data[0].forEach(function(tweet){
             $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($tw_ul)
@@ -117,20 +117,25 @@ $(function(){
       }
     } else {};
 
+    var $text;
+    if (article['des_facet'] != '' && article ['geo_facet'] != '') {
+      $text = article['des_facet'] + ' in ' + article ['geo_facet'];
+    } else if (article['des_facet'] != '' && article ['geo_facet'] == '') {
+      $text = article['des_facet'];
+    } else if (article['des_facet'] == '' && article ['geo_facet'] != '') {
+      $text = article['geo_facet'];
+    }
+
     var $form = $("<form>").attr("action", "/user_click").attr("method", "post").attr('class', 'nyt-topic');
     var $dataInput = $("<input type='hidden'>").attr('value', $topicOfChoice).attr('name','topic');
-    var $submitInput = $("<input type='submit'>").attr('value', article['des_facet'] + ' in ' + article['geo_facet']).attr('class', 'nyt-topic-btn');
+    // var $submitInput = $("<input type='submit'>").attr('value', article['des_facet'] + ' in ' + article['geo_facet']).attr('class', 'nyt-topic-btn');
+    var $submitInput = $("<input type='submit'>").attr('value', $text).attr('class', 'nyt-topic-btn');
+
 
     $form.append($dataInput).append($submitInput);
     $formDiv.append($form);
   };
 
   getResults();
-
-// data = [
-// @tweets_1, @tweets_2, @tweets_3, 
-// @search_term_1, @search_term_2, @search_term_3, 
-// @first_org, @second_org, @third_org, 
-// @first_org_details, @second_org_details, @third_org_details]
 
 });
