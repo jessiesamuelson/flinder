@@ -117,9 +117,20 @@ $(function(){
       }
     } else {};
 
+    var $text;
+    if (article['des_facet'] != '' && article ['geo_facet'] != '') {
+      $text = article['des_facet'] + ' in ' + article ['geo_facet'];
+    } else if (article['des_facet'] != '' && article ['geo_facet'] == '') {
+      $text = article['des_facet'];
+    } else if (article['des_facet'] == '' && article ['geo_facet'] != '') {
+      $text = article['geo_facet'];
+    }
+
     var $form = $("<form>").attr("action", "/user_click").attr("method", "post").attr('class', 'nyt-topic');
     var $dataInput = $("<input type='hidden'>").attr('value', $topicOfChoice).attr('name','topic');
-    var $submitInput = $("<input type='submit'>").attr('value', article['des_facet'] + ' in ' + article['geo_facet']).attr('class', 'nyt-topic-btn');
+    // var $submitInput = $("<input type='submit'>").attr('value', article['des_facet'] + ' in ' + article['geo_facet']).attr('class', 'nyt-topic-btn');
+    var $submitInput = $("<input type='submit'>").attr('value', $text).attr('class', 'nyt-topic-btn');
+
 
     $form.append($dataInput).append($submitInput);
     $formDiv.append($form);
