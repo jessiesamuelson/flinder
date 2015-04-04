@@ -10,20 +10,7 @@ class NytController < ApplicationController
 		# loads tweets with user input
 		@tweets = load_tweets(@user_search_term)
 
-		# removes duplicate tweets
-		# i = 0
-		# while i < @tweets.length do
-		# 	j = i + 1
-		# 	while j < @tweets.length do
-		# 		if @tweets[i].text.split.length > 4 && @tweets[j].text.split.length > 4
-		# 			if @tweets[i].text == @tweets[j].text
-		# 				@tweets.delete_at(j)
-		# 			else
-		# 				j += 1
-		# 			end
-		# 	end
-		# i += 1
-		# end
+		# Removes tweets with the same first 4 words
 		i = 0
 		while i < @tweets.length do
 			j = i + 1

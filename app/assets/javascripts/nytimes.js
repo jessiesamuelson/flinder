@@ -74,14 +74,62 @@ $(function(){
           }
           if (data[3] != null){
             data[3].forEach(function(org){
-            $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
+              var $statsArray = [org["revenue_total"], org["income_total"]];
+              console.log($statsArray);
+              var organization_id = "svg-" + org['organization_id']; 
+              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"])).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
+                var setUpStats = function(stats){
+                  var height = 150;
+                  var width = 480;
+                  
+                  // var $svgObject = $('#' + organization_id);                  
+
+                  var svg = d3.select('#' + organization_id)
+                    .attr('width', width)
+                    .attr('height', height)
+                    .style('background-color', '#FFFFFF')
+                  
+
+                  svg.selectAll('rect')
+                    .data(stats)
+                    .exit()
+                    .remove();
+
+                  svg.selectAll('rect')
+                    .data(stats)
+                    .enter()
+                    .append('rect')
+
+                  svg.selectAll('rect')
+                    .attr('height', 30)
+                    .attr('width', function(d) { return d /300})
+                    .attr('x', function(d) { return -(d / 300)})
+                    .attr('y', function(d, i){ return 35 + (50 * i) })
+                    .style('fill', '#C7D353')
+                  .transition()
+                    .duration(1000)
+                    .attr('x', 0)
+                }
+                setUpStats($statsArray);
+
             })
           } 
         }
       })
     })
   };
+  var setUpStats = function(stats){
+    svg.selectAll('rect')
+    .data(stats)
+    .exit()
+    .remove();
 
+  svg.selectAll('rect')
+    .data(stats)
+    .enter()
+    .append('rect')
+
+  }
   getUserChoice();
   getUserClick();
   
