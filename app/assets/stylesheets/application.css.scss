@@ -43,7 +43,7 @@ body {
 }
 
 .spinner {
-  position: absolute;
+  position: fixed;
   z-index: 1;
 
   img {
@@ -162,6 +162,10 @@ body {
         background-color: $flinderFG;
         color: rgba(233, 218, 252, 0.3);
       }
+
+      &:active {
+        background-color: $flinderLogo;
+      }
     }
   }
 }
@@ -178,9 +182,14 @@ body {
     li {
       margin: 2px;
       padding: 5px;
-      border: 1px solid white;
+      border: 1px solid $flinderFG;
       white-space: normal;
+    }
 
+    a {
+      color: $flinderBG;
+      background-color: $flinderLogo;
+      text-decoration: none;
     }
   }
 }
@@ -197,9 +206,12 @@ body {
     li {
       margin: 2px;
       padding: 5px;
-      border: 1px solid white;
+      border: 1px solid $flinderFG;
       white-space: normal;
-
+      a {
+        color: $flinderBG;
+        text-decoration: none;
+      }
     }
   }
 }

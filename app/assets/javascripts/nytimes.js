@@ -26,7 +26,7 @@ $(function(){
     $form.on('submit', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);`
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
 
       $.ajax({
         url: '/user_choice',
@@ -122,7 +122,7 @@ $(function(){
     $formDiv.on('submit', 'form', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);`
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
 
       $.ajax({
         url: '/user_click',
