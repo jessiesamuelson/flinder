@@ -49,7 +49,62 @@ $(function(){
           }
           if (data[4] != null){
             data[4].forEach(function(org){
-            $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"]))
+              var $statsArray = [{value: org["revenue_total"], type: "revenue total"}, {value: org["income_total"], type: "income total"}];
+              var organization_id = "svg-" + org['organization_id'];
+              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"])).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
+              var setUpStats = function(stats){
+                  var height = 150;
+                  var width = 480;
+                  
+                  // var $svgObject = $('#' + organization_id);                  
+
+                  var svg = d3.select('#' + organization_id)
+                    .attr('width', width)
+                    .attr('height', height)
+                    .style('background-color', '#FFFFFF')
+                  
+
+                  svg.selectAll('rect')
+                    .data(stats)
+                    .exit()
+                    .remove();
+
+                  svg.selectAll('rect')
+                    .data(stats)
+                    .enter()
+                    .append('rect')
+
+                  svg.selectAll('rect')
+                    .attr('height', 30)
+                    .attr('width', function(d) { return d.value /300})
+                    .attr('x', function(d) { return -(d.value / 300)})
+                    .attr('y', function(d, i){ return 35 + (50 * i) })
+                    .style('fill', '#C7D353')
+                    .text(function(d) {return d.type})
+                  .transition()
+                    .duration(1000)
+                    .attr('x', 0)
+
+                  svg.selectAll('text')
+                    .data(stats)
+                    .exit()
+                    .remove();
+
+                  svg.selectAll('text')
+                    .data(stats)
+                    .enter()
+                    .append('text')
+
+                  svg.selectAll('text')
+                    .attr('height', 30)
+                    .attr('width', function(d) { return d.value /300})
+                    .attr('x', 0)
+                    .attr('y', function(d, i){ return 35 + (50 * i) })
+                    // .style('fill', '#C7D353')
+                    .text(function(d) {return d.type})
+
+                }
+                setUpStats($statsArray);
             })
           } 
         }
@@ -64,7 +119,7 @@ $(function(){
       e.preventDefault();
 
       $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
-      
+
       $.ajax({
         url: '/user_click',
         dataType: 'json',
@@ -131,6 +186,7 @@ $(function(){
       })
     })
   };
+  
   var setUpStats = function(stats){
     svg.selectAll('rect')
     .data(stats)
