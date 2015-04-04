@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
       config.consumer_secret = Rails.application.secrets.consumer_secret
     end
     
-    @tweets = client.search("#{search_term}", lang: 'en').take(15)
+    @tweets = client.search("#{search_term} -RT", lang: 'en').take(50)
   end  
 
   def my_tweets
