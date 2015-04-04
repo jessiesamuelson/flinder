@@ -42,6 +42,16 @@ body {
   background-color: $flinderBG;
 }
 
+.spinner {
+  position: absolute;
+  z-index: 1;
+
+  img {
+    width: 200px;
+    position: relative;
+    margin-left: 46%;
+  }
+}
 
 .main-nav {
   width: 100%;

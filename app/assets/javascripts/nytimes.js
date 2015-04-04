@@ -1,6 +1,9 @@
 console.log('nytimes.js running');
 
 $(function(){
+
+
+
   var $formDiv = $('#user-click');
 
   // Pulls in results from NYTimes API through NYTimes controller
@@ -23,6 +26,7 @@ $(function(){
 
     $form.on('submit', function(e){
       e.preventDefault();
+
 
       $.ajax({
         url: '/user_choice',
@@ -51,8 +55,13 @@ $(function(){
   };
 
   function getUserClick() {
+    var $spinner = $('.spinner');
+
     $formDiv.on('submit', 'form', function(e){
       e.preventDefault();
+
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+      
       $.ajax({
         url: '/user_click',
         dataType: 'json',
@@ -60,6 +69,9 @@ $(function(){
           topic: this.elements.topic.value
         },
         success: function(data){
+          $spinner.empty();
+          $('#topic-search').ScrollTo();
+
           var $tw_ul = $("#topic-twitter-search-result").append("<h2></h2>").text(data[2])
           data[0].forEach(function(tweet){
             $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($tw_ul)
