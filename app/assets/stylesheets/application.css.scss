@@ -26,6 +26,7 @@ $flinderLogo: #C7D353;
   padding:0;
   font-family:inherit;
   border: none;
+  list-style: none;
 }
 
 input[type='text'] ,
@@ -74,6 +75,10 @@ body {
         &:hover{
           color: $flinderLogo;
           transition: .05s ease-in-out;
+        }
+
+        &:active{
+          color: #FFF;
         }
       }
     }
@@ -153,48 +158,79 @@ body {
 
 #my-search {
   @include outer-container(1000px);
+  margin-top: 50px;
   
   .search-result {
     @include span-columns(6);
+    padding: 5px;
+    background: $flinderFG;
+
+    li {
+      margin: 2px;
+      padding: 5px;
+      border: 1px solid white;
+      white-space: normal;
+
+    }
   }
 }
 
 #topic-search {
   @include outer-container(1000px);
+  margin-top: 50px;
   
   .click-result {
     @include span-columns(6);
+    padding: 5px;
+    white-space: normal;
   }
 }
 
 #times {
   @include outer-container(1000px);
+  h1.nyt-header {
+    margin-top: 50px;
+    margin-bottom: 25px;
+  }
 }
 
 .nyt-topic {
 	@include span-columns(3);
-
-  .nytimes-results {
-    height: 600px;
-  }
+  @include omega(4n);
+  margin-bottom: 1.5em;
 }
 
 .nyt-topic-btn {
-  width: 250px;
-  height: 50px;
-  margin: 5px;
-  white-space: normal;
+  width: 225px;
+  height: 115px;
+  white-space: pre-wrap;
   text-align: left;
+  overflow:auto;
   font-size: 18px;
   font-weight: 700;
   background-color: rgba(233, 218, 252, 0.3);
   color: $flinderBG;
+  border-radius: 2px;
+
+   &:hover {
+      background-color: $flinderFG;
+      color: rgba(233, 218, 252, 0.3);
+    }
+
+    &:active{
+      outline: none;
+      background-color: $flinderFG;
+      color: rgba(233, 218, 252, 0.3);
+    }
+
+    &:focus{
+      outline: none;
+    }
 }
 
 h1 {
   color: #FFF;
 }
-
 
 
 

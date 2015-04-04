@@ -14,16 +14,25 @@ class ApplicationController < ActionController::Base
   # # Determines what tweets are loaded onto page.  
   # # Return to here with more relevant search credentials
 
-    def load_tweets(search_term)
+  # def load_tweets(search_term)
+  #   client = Twitter::REST::Client.new do |config|
+  #     config.consumer_key = Rails.application.secrets.consumer_key
+  #     config.consumer_secret = Rails.application.secrets.consumer_secret
+  #   end
+  #   if client.search("#{search_term} OR charity", result_type: "popular").any?
+  #     return @tweets = client.search("#{search_term} OR charity", result_type: "popular", lang: 'en').take(15)
+  #   else
+  #     return @tweets = client.search("#{search_term} OR charity", result_type: "recent", lang: 'en').take(15)
+  #   end
+  # end  
+
+  def load_tweets(search_term)
     client = Twitter::REST::Client.new do |config|
       config.consumer_key = Rails.application.secrets.consumer_key
       config.consumer_secret = Rails.application.secrets.consumer_secret
     end
-    if client.search("#{search_term} OR charity", result_type: "popular").any?
-      return @tweets = client.search("#{search_term} OR charity", result_type: "popular", lang: 'en').take(15)
-    else
-      return @tweets = client.search("#{search_term} OR charity", result_type: "recent", lang: 'en').take(15)
-    end
+    
+    @tweets = client.search("#{search_term}", lang: 'en').take(15)
   end  
 
   def my_tweets
