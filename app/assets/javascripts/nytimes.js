@@ -28,7 +28,7 @@ $(function(){
     $form.on('submit', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);`
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
 
 
       $.ajax({
@@ -53,10 +53,13 @@ $(function(){
             data[4].forEach(function(org){
               var $statsArray = [{value: org["revenue_total"], type: "revenue total"}, {value: org["income_total"], type: "income total"}];
               var organization_id = "svg-" + org['organization_id'];
-              // var revenue = org["revenue_total"]
-              // ("$" +revenue).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-              // console.log(revenue)
-              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"])).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
+              
+              var revenue = "$" + org["revenue_total"];
+              var formattedRevenue = (revenue).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              var income = "$" + org["income_total"];
+              var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + formattedIncome)).append($("<div></div>").text("Revenue Total: " + formattedRevenue)).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
               var setUpStats = function(stats){
                   var height = 150;
                   var width = 480;
@@ -125,7 +128,7 @@ $(function(){
     $formDiv.on('submit', 'form', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);`
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
 
       $.ajax({
         url: '/user_click',
@@ -151,19 +154,13 @@ $(function(){
             data[3].forEach(function(org){
               var $statsArray = [{value: org["revenue_total"], type: "revenue total"}, {value: org["income_total"], type: "income total"}];
               var organization_id = "svg-" + org['organization_id'];
-              var revenue = org["revenue_total"]
 
-              if (revenue > 999999){
-                
-              } else if (revenue > 999) {
-
-              } else {
-
-              }
-
-              // revenue.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-              // console.log(revenue)
-              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"])).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
+              var revenue = "$" + org["revenue_total"];
+              var formattedRevenue = (revenue).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              var income = "$" + org["income_total"];
+              var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              
+              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + formattedIncome)).append($("<div></div>").text("Revenue Total: " + formattedRevenue)).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
                 var setUpStats = function(stats){
                   var height = 150;
                   var width = 480;
