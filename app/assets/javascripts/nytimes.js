@@ -27,12 +27,15 @@ $(function(){
     $form.on('submit', function(e){
       e.preventDefault();
 
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
 
       $.ajax({
         url: '/user_choice',
         dataType: 'json',
         data: $(this).serialize(),
         success: function(data){
+          $spinner.empty();
+          $('#my-search').ScrollTo();
 
           var $tw_ul = $("#my-twitter-search-result").append("<h2></h2>").text(data[3])
           data[0].forEach(function(tweet){
