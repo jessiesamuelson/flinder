@@ -193,6 +193,14 @@ body {
     @include span-columns(6);
     padding: 5px;
     white-space: normal;
+
+    li {
+      margin: 2px;
+      padding: 5px;
+      border: 1px solid white;
+      white-space: normal;
+
+    }
   }
 }
 

@@ -2,8 +2,6 @@ console.log('nytimes.js running');
 
 $(function(){
 
-
-
   var $formDiv = $('#user-click');
 
   // Pulls in results from NYTimes API through NYTimes controller
@@ -22,12 +20,13 @@ $(function(){
 
   // Gets user's search results and renders to the page
   function getUserChoice() {
+    var $spinner = $('.spinner');
     var $form = $('#user-search');
 
     $form.on('submit', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - $('spinner.gif').outerHeight()) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - $('spinner.gif').outerWidth()) / 2) + $(window).scrollLeft()) + "px");
 
       $.ajax({
         url: '/user_choice',
@@ -118,7 +117,7 @@ $(function(){
     $formDiv.on('submit', 'form', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
 
       $.ajax({
         url: '/user_click',
