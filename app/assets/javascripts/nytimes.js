@@ -26,7 +26,7 @@ $(function(){
     $form.on('submit', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - $('spinner.gif').outerHeight()) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - $('spinner.gif').outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);`
 
       $.ajax({
         url: '/user_choice',
@@ -50,6 +50,9 @@ $(function(){
             data[4].forEach(function(org){
               var $statsArray = [{value: org["revenue_total"], type: "revenue total"}, {value: org["income_total"], type: "income total"}];
               var organization_id = "svg-" + org['organization_id'];
+              // var revenue = org["revenue_total"]
+              // ("$" +revenue).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              // console.log(revenue)
               $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"])).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
               var setUpStats = function(stats){
                   var height = 150;
@@ -60,7 +63,7 @@ $(function(){
                   var svg = d3.select('#' + organization_id)
                     .attr('width', width)
                     .attr('height', height)
-                    .style('background-color', '#FFFFFF')
+                    // .style('background-color', '#')
                   
 
                   svg.selectAll('rect')
@@ -99,8 +102,10 @@ $(function(){
                     .attr('width', function(d) { return d.value /300})
                     .attr('x', 0)
                     .attr('y', function(d, i){ return 35 + (50 * i) })
-                    // .style('fill', '#C7D353')
+                    
                     .text(function(d) {return d.type})
+                    .attr('font-family', 'Roboto')
+                    .style('fill', '#FFFFFF')
 
                 }
                 setUpStats($statsArray);
@@ -117,7 +122,7 @@ $(function(){
     $formDiv.on('submit', 'form', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
+      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);`
 
       $.ajax({
         url: '/user_click',
@@ -141,9 +146,20 @@ $(function(){
           }
           if (data[3] != null){
             data[3].forEach(function(org){
-              var $statsArray = [org["revenue_total"], org["income_total"]];
-              console.log($statsArray);
-              var organization_id = "svg-" + org['organization_id']; 
+              var $statsArray = [{value: org["revenue_total"], type: "revenue total"}, {value: org["income_total"], type: "income total"}];
+              var organization_id = "svg-" + org['organization_id'];
+              var revenue = org["revenue_total"]
+
+              if (revenue > 999999){
+                
+              } else if (revenue > 999) {
+
+              } else {
+
+              }
+
+              // revenue.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              // console.log(revenue)
               $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + org["income_total"])).append($("<div></div>").text("Revenue Total: " + org["revenue_total"])).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
                 var setUpStats = function(stats){
                   var height = 150;
@@ -154,7 +170,7 @@ $(function(){
                   var svg = d3.select('#' + organization_id)
                     .attr('width', width)
                     .attr('height', height)
-                    .style('background-color', '#FFFFFF')
+                    // .style('background-color', '#FFFFFF')
                   
 
                   svg.selectAll('rect')
@@ -169,13 +185,32 @@ $(function(){
 
                   svg.selectAll('rect')
                     .attr('height', 30)
-                    .attr('width', function(d) { return d /300})
-                    .attr('x', function(d) { return -(d / 300)})
+                    .attr('width', function(d) { return d.value /300})
+                    .attr('x', function(d) { return -(d.value / 300)})
                     .attr('y', function(d, i){ return 35 + (50 * i) })
                     .style('fill', '#C7D353')
                   .transition()
                     .duration(1000)
                     .attr('x', 0)
+
+                  svg.selectAll('text')
+                    .data(stats)
+                    .exit()
+                    .remove();
+
+                  svg.selectAll('text')
+                    .data(stats)
+                    .enter()
+                    .append('text')
+
+                  svg.selectAll('text')
+                    .attr('height', 30)
+                    .attr('width', function(d) { return d.value /300})
+                    .attr('x', 0)
+                    .attr('y', function(d, i){ return 35 + (50 * i) })
+                    .text(function(d) {return d.type})
+                    .attr('font-family', 'Roboto')
+                    .style('fill', '#FFFFFF')
                 }
                 setUpStats($statsArray);
 
@@ -251,8 +286,6 @@ $(function(){
     } else {
       var $submitInput = $("<input type='submit'>").attr('value', $text).attr('class', 'nyt-topic-btn');
     };
-
-    console.log($text);
 
     $form.append($dataInput).append($submitInput);
     $formDiv.append($form);
