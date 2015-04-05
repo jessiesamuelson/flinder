@@ -266,7 +266,9 @@ h1 {
   color: #FFF;
 }
 
-#topic-guidestar-results {}
+#topic-guidestar-results {
+  background-color: $flinderFG;
+}
 
 .gs-result {
   overflow: hidden;
@@ -281,17 +283,19 @@ h1 {
   }
 }
 
-#topic-twitter-search-result {}
+#topic-twitter-search-result {
+  background-color: $flinderFG;
+}
 
 .tw-result {
-  margin: 5px;
+  margin: 7px;
   padding: 5px;
   border: 1px solid $flinderFG;
   white-space: normal;
-  background-color: $flinderFG;
+  background-color: $flinderBG;
     
   a {
-    color: $flinderBG;
+    color: #FFF;
     text-decoration: none;
   }
 }
