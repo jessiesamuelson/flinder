@@ -42,6 +42,7 @@ $(function(){
           var $tw_ul = $("#my-twitter-search-result").append("<h2></h2>").text(data[3])
           data[0].forEach(function(tweet){
             $("<li></li>")
+              .attr('class', 'tw-result')
               .append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>"))
               .appendTo($tw_ul)
           })
@@ -161,7 +162,9 @@ $(function(){
 
           var $tw_ul = $("#topic-twitter-search-result").append("<h2></h2>").text(data[2])
           data[0].forEach(function(tweet){
-            $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>"))
+            $("<li></li>")
+              .attr('class', 'tw-result')
+              .append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>"))
               .appendTo($tw_ul)
           })
           var $gs_ul = $("#topic-guidestar-results").append("<h2></h2>").text(data[2]);

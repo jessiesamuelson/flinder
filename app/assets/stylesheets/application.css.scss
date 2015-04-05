@@ -190,19 +190,6 @@ body {
     @include span-columns(6);
     padding: 5px;
     background: $flinderFG;
-
-    li {
-      margin: 2px;
-      padding: 5px;
-      border: 1px solid $flinderFG;
-      white-space: normal;
-    }
-
-    a {
-      color: $flinderBG;
-      background-color: $flinderFG;
-      text-decoration: none;
-    }
   }
 }
 
@@ -214,17 +201,6 @@ body {
     @include span-columns(6);
     padding: 5px;
     white-space: normal;
-
-    li {
-      margin: 2px;
-      padding: 5px;
-      border: 1px solid $flinderFG;
-      white-space: normal;
-      a {
-        color: $flinderFG;
-        text-decoration: none;
-      }
-    }
   }
 }
 
@@ -288,6 +264,36 @@ body {
 
 h1 {
   color: #FFF;
+}
+
+#topic-guidestar-results {}
+
+.gs-result {
+  overflow: hidden;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid $flinderFG;
+  white-space: normal;
+    
+  a {
+    color: $flinderFG;
+    text-decoration: none;
+  }
+}
+
+#topic-twitter-search-result {}
+
+.tw-result {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid $flinderFG;
+  white-space: normal;
+  background-color: $flinderFG;
+    
+  a {
+    color: $flinderBG;
+    text-decoration: none;
+  }
 }
 
 .user-form {
