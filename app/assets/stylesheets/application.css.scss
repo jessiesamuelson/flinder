@@ -28,8 +28,22 @@ body {
   background-color: $flinderBG;
 }
 
-::selection, 
-::-moz-selection {  
+h1::selection {  
+  background-color: $flinderLogo;
+  color: #FFF;
+}
+
+h1::-moz-selection {  
+  background-color: $flinderLogo;
+  color: #FFF;
+}
+
+label::selection {  
+  background-color: $flinderLogo;
+  color: #FFF;
+}
+
+label::-moz-selection {  
   background-color: $flinderLogo;
   color: #FFF;
 }
@@ -189,7 +203,6 @@ body {
   .search-result {
     @include span-columns(6);
     padding: 5px;
-    background: $flinderFG;
   }
 }
 
@@ -249,6 +262,7 @@ body {
    &:hover {
       background-color: $flinderFG;
       color: rgba(233, 218, 252, 0.3);
+      cursor: pointer;
     }
 
     &:active{
@@ -266,16 +280,14 @@ h1 {
   color: #FFF;
 }
 
-#topic-guidestar-results {
-  background-color: $flinderFG;
-}
+#topic-guidestar-results {}
 
 .gs-result {
   overflow: hidden;
-  margin: 5px;
+  margin: 8px;
   padding: 5px;
-  border: 1px solid $flinderFG;
   white-space: normal;
+  border: 1px solid $flinderFG;
     
   a {
     color: $flinderFG;
@@ -283,16 +295,18 @@ h1 {
   }
 }
 
-#topic-twitter-search-result {
-  background-color: $flinderFG;
-}
+#topic-twitter-search-result {}
 
 .tw-result {
-  margin: 7px;
+  margin: 8px;
   padding: 5px;
   border: 1px solid $flinderFG;
   white-space: normal;
-  background-color: $flinderBG;
+  background-color: $flinderFG;
+
+  &:hover {
+    background-color: $flinderLogo;
+  }
     
   a {
     color: #FFF;
