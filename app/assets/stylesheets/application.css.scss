@@ -228,10 +228,6 @@ body {
   }
 }
 
-.hidden-form {
-  display: none;
-}
-
 #times {
   @include outer-container(1000px);
   h1.nyt-header {
@@ -246,12 +242,28 @@ body {
   margin-bottom: 1.5em;
 }
 
+.green-form {
+  width: 225px;
+  height: 115px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+  color: $flinderBG;
+  background-color: $flinderLogo;
+  border-radius: 2px;
+
+    p {
+      vertical-align: middle;
+      line-height: 115px;
+    }
+}
+
 .nyt-topic-btn {
   width: 225px;
   height: 115px;
   white-space: pre-wrap;
   text-align: left;
-  overflow:auto;
+  overflow: auto;
   font-size: 18px;
   font-weight: 700;
   background-color: rgba(233, 218, 252, 0.3);
