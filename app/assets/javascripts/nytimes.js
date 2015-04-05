@@ -61,10 +61,23 @@ $(function(){
               var income = "$" + org["income_total"];
               var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 
-              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + formattedIncome)).append($("<div></div>").text("Revenue Total: " + formattedRevenue)).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
+              $('#organization-' + org['organization_id'])
+                .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
+                .append($("<div></div>").text("Income Total: " + formattedIncome)).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
               var setUpStats = function(stats){
                   var height = 150;
                   var width = 480;
+
+                  var minStat = d3.min(stats, function(d){return d.value;
+                  });                  
+                  var maxStat = d3.max(stats, function(d){return d.value;
+                  });
+
+                  var scaleX = d3.scale.linear()
+                    .domain([0, maxStat])
+                    .range([0, 300])
+
+
                   var svg = d3.select('#' + organization_id)
                     .attr('width', width)
                     .attr('height', height)
@@ -82,8 +95,8 @@ $(function(){
 
                   svg.selectAll('rect')
                     .attr('height', 30)
-                    .attr('width', function(d) { return d.value /300})
-                    .attr('x', function(d) { return -(d.value / 300)})
+                    .attr('width', function(d) { return scaleX(d.value)})
+                    .attr('x', function(d) { return -(scaleX(d.value))})
                     .attr('y', function(d, i){ return 35 + (50 * i) })
                     .style('fill', '#C7D353')
                     .text(function(d) {return d.type})
@@ -164,22 +177,34 @@ $(function(){
               var income = "$" + org["income_total"];
               var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
               
-              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + formattedIncome)).append($("<div></div>")
-                .text("Revenue Total: " + formattedRevenue))
+              $('#organization-' + org['organization_id'])
+                .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
+                .append($("<div></div>").text("Income Total: " + formattedIncome))
                 .append('<svg class="stats-field" id='+ organization_id+ '></svg>');
 
                 var setUpStats = function(stats){
                   var height = 150;
                   var width = 480;
+
+                  var minStat = d3.min(stats, function(d){return d.value;
+                  });                  
+                  var maxStat = d3.max(stats, function(d){return d.value;
+                  });
                   
-                  // var $svgObject = $('#' + organization_id);                  
+                  // var upperLimit = if (maxStat/30 < 450) {
+                  //   return maxStat/30
+                  // } else {
+                  //   return 450
+                  // }
+
+                  var scaleX = d3.scale.linear()
+                    .domain([0, maxStat])
+                    .range([0, 300])           
 
                   var svg = d3.select('#' + organization_id)
                     .attr('width', width)
                     .attr('height', height)
-                    // .style('background-color', '#FFFFFF')
                   
-
                   svg.selectAll('rect')
                     .data(stats)
                     .exit()
@@ -192,8 +217,8 @@ $(function(){
 
                   svg.selectAll('rect')
                     .attr('height', 30)
-                    .attr('width', function(d) { return d.value /300})
-                    .attr('x', function(d) { return -(d.value / 300)})
+                    .attr('width', function(d) { return scaleX(d.value)})
+                    .attr('x', function(d) { return -(scaleX(d.value))})
                     .attr('y', function(d, i){ return 35 + (50 * i) })
                     .style('fill', '#C7D353')
                   .transition()
@@ -228,18 +253,6 @@ $(function(){
     })
   };
   
-  var setUpStats = function(stats){
-    svg.selectAll('rect')
-    .data(stats)
-    .exit()
-    .remove();
-
-  svg.selectAll('rect')
-    .data(stats)
-    .enter()
-    .append('rect')
-
-  }
   getUserChoice();
   getUserClick();
   
