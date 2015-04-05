@@ -41,7 +41,7 @@ $(function(){
 
           var $tw_ul = $("#my-twitter-search-result");
           var $tw_div = $("#tw-search-result");
-          var $tw_h1 = ("<h1>Twitter " + data[3] + " Results</h1>");
+          var $tw_h1 = ("<h1>Twitter Results " + data[3] + "</h1>");
           $tw_div.prepend($tw_h1);
           data[0].forEach(function(tweet){
             $("<li></li>")
@@ -51,7 +51,7 @@ $(function(){
           })
           var $gs_ul = $("#my-guidestar-results");
           var $gs_div = $("#gs-search-result");
-          var $gs_h1 = ("<h1>GuideStar " + data[3] + " Results</h1>");
+          var $gs_h1 = ("<h1>GuideStar Results for " + data[3] + "</h1>");
           $gs_div.prepend($gs_h1);
           if (data[1] != null){
             data[1].forEach(function(org){
@@ -179,7 +179,7 @@ $(function(){
 
           var $tw_ul = $("#topic-twitter-search-result");
           var $tw_div = $("#tw-click-result");
-          var $tw_h1 = ("<h1>Twitter " + data[2] + " Results</h1>");
+          var $tw_h1 = ("<h1>Twitter Results for " + data[2] + "</h1>");
           $tw_div.prepend($tw_h1);
 
           data[0].forEach(function(tweet){
@@ -190,7 +190,7 @@ $(function(){
           })
           var $gs_ul = $("#topic-guidestar-results");
           var $gs_div = $("#gs-click-result");
-          var $gs_h1 = ("<h1>GuideStar " + data[2] + " Results</h1>");
+          var $gs_h1 = ("<h1>GuideStar Results for " + data[2] + "</h1>");
           $gs_div.prepend($gs_h1);
           if (data[1] != null){
             data[1].forEach(function(org){
