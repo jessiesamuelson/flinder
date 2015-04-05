@@ -104,7 +104,6 @@ $(function(){
                   var svg = d3.select('#' + organization_id)
                     .attr('width', width)
                     .attr('height', height)
-                    // .style('background-color', '#')
                   
                   svg.selectAll('rect')
                     .data(stats)
