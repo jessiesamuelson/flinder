@@ -26,7 +26,9 @@ $(function(){
     $form.on('submit', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
+      $spinner.append("<img src='/spinner.gif' />")
+        .css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px")
+        .css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
 
       $.ajax({
         url: '/user_choice',
@@ -38,7 +40,9 @@ $(function(){
 
           var $tw_ul = $("#my-twitter-search-result").append("<h2></h2>").text(data[3])
           data[0].forEach(function(tweet){
-            $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($tw_ul)
+            $("<li></li>")
+              .append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>"))
+              .appendTo($tw_ul)
           })
           var $gs_ul = $("#my-guidestar-results").append("<h2></h2>").text(data[3]);
           if (data[1] != null){
@@ -125,7 +129,10 @@ $(function(){
     $formDiv.on('submit', 'form', function(e){
       e.preventDefault();
 
-      $spinner.append("<img src='/spinner.gif' />").css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px").css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
+      $spinner.append("<img src='/spinner.gif' />")
+        .css("top", Math.max(0, (($(window).height() - 900) / 2) + $(window).scrollTop()) + "px")
+        .css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px")
+        .hide().fadeIn(200);
 
       $.ajax({
         url: '/user_click',
@@ -139,12 +146,15 @@ $(function(){
 
           var $tw_ul = $("#topic-twitter-search-result").append("<h2></h2>").text(data[2])
           data[0].forEach(function(tweet){
-            $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>")).appendTo($tw_ul)
+            $("<li></li>").append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>"))
+              .appendTo($tw_ul)
           })
           var $gs_ul = $("#topic-guidestar-results").append("<h2></h2>").text(data[2]);
           if (data[1] != null){
             data[1].forEach(function(org){
-              $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul).append($("<div></div>").text(org["mission"]))
+              $("<li></li>").attr('id', "organization-" + org["organization_id"])
+                .text(org["organization_name"])
+                .appendTo($gs_ul).append($("<div></div>").text(org["mission"]))
             })        
           }
           if (data[3] != null){
@@ -157,7 +167,10 @@ $(function(){
               var income = "$" + org["income_total"];
               var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
               
-              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + formattedIncome)).append($("<div></div>").text("Revenue Total: " + formattedRevenue)).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
+              $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + formattedIncome)).append($("<div></div>")
+                .text("Revenue Total: " + formattedRevenue))
+                .append('<svg class="stats-field" id='+ organization_id+ '></svg>');
+                
                 var setUpStats = function(stats){
                   var height = 150;
                   var width = 480;
@@ -278,8 +291,9 @@ $(function(){
     var $dataInput = $("<input type='hidden'>").attr('value', $topicOfChoice).attr('name','topic');
     // var $submitInput = $("<input type='submit'>").attr('value', article['des_facet'] + ' in ' + article['geo_facet']).attr('class', 'nyt-topic-btn');
 
-    if ($text == "") {
-      var $submitInput = $("<input type='hidden'>").attr('value', $text).attr('class', 'nyt-topic-btn');
+    // debugger;
+    if ($text === undefined) {
+      $form.remove();
     } else {
       var $submitInput = $("<input type='submit'>").attr('value', $text).attr('class', 'nyt-topic-btn');
     };

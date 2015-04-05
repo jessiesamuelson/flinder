@@ -1,13 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<%= form_for @user, as: :session, url: session_url do |f| %>
-	<%= f.text_field :email, placeholder: 'Email Address' %><br>
-	<%= f.password_field :password, placeholder: 'Password' %><br>
-	<%= f.submit 'Log In!' %>
-<% end %>
+<%= render 'static/nav' %>
 
-<% if !@user.oauth_token %>
-  <%= button_to "LoginWithTwitter", '/users/twitterlogin', method: "get" %>
-<% end %>
+<div class="user-form">
+	<%= form_for @user, as: :session, url: session_url do |f| %>
+		<%= f.text_field :email, placeholder: 'Email Address' %><br>
+		<%= f.password_field :password, placeholder: 'Password' %><br>
+		<%= f.submit 'Log In' %>
+	<% end %>
+	<p>Or</p>
+	<% if !@user.oauth_token %>
+	  <%= button_to "Login With Twitter", '/users/twitterlogin', method: "get" %>
+	<% end %>
 
-<p>Don't have an account yet? <%= link_to 'Sign Up', signup_path %></p>
+	<p>Don't have an account yet? <%= link_to 'Sign Up', signup_path %></p>
+</div>

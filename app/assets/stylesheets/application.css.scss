@@ -1,17 +1,3 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- */
-
 @import "bourbon";
 @import "neat";
 @import "neat-helpers";
@@ -40,6 +26,32 @@ form {
 body {
   font-family: 'Roboto';
   background-color: $flinderBG;
+}
+
+::selection, 
+::-moz-selection {  
+  background-color: $flinderLogo;
+  color: #FFF;
+}
+
+.about {
+  width: 100%;
+  height: 150px;
+  right: 0.1px;
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  p {
+    width: 600px;
+    margin: 0 auto;
+    padding: 55px 0;
+    font-size: 12px;
+    line-height: 1.5em;
+    font-style: italic;
+    text-align: center;
+    color: #FFF;
+  }
 }
 
 .spinner {
@@ -188,7 +200,7 @@ body {
 
     a {
       color: $flinderBG;
-      background-color: $flinderLogo;
+      background-color: $flinderFG;
       text-decoration: none;
     }
   }
@@ -209,11 +221,15 @@ body {
       border: 1px solid $flinderFG;
       white-space: normal;
       a {
-        color: $flinderBG;
+        color: $flinderFG;
         text-decoration: none;
       }
     }
   }
+}
+
+.hidden-form {
+  display: none;
 }
 
 #times {
@@ -262,6 +278,88 @@ h1 {
   color: #FFF;
 }
 
+.user-form {
+  width: 800px;
+  position: relative;
+  margin: 0 auto;
 
+  label {
+    margin-bottom:15px;
+    font-weight: 700;
+    font-size: 2em;
+    color: #FFF;
+  }
+
+  a {
+    color: $flinderLogo;
+    text-decoration: none;
+
+    &:hover {
+      color: #FFF;
+    }
+
+    &:active {
+      text-decoration: underline;
+    }
+  }
+
+  p {
+    position: relative;
+    margin-top: 5px;
+    padding: 10px;
+    left: 40px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #FFF;
+  }
+
+  #new_session,
+  #new_user,
+  .button_to {
+    padding: 50px 50px 0;
+
+    input[type='text'],
+    input[type='password'] {
+      width:100%;
+      height:40px;
+      margin-bottom: 2px;
+      padding: 10px;
+      color: $flinderFG;
+      font-weight: 700;
+      font-size: 18px;
+
+        &::-webkit-input-placeholder {
+          color: $flinderFG;
+          opacity: 0.5;
+          font-weight: 700;
+          font-size: 18px;
+        }
+      }
+
+        input:focus {
+          outline: none;
+          background-color: rgba(233, 218, 252, 0.5);
+          color: #FFF;
+        }
+
+        input[type='submit'] {
+          padding: 15px;
+          margin-top: 2px;
+          font-weight: 700;
+          font-size: 18px;
+          background-color: rgba(233, 218, 252, 0.3);
+          color: $flinderBG;
+
+          &:hover {
+            background-color: $flinderFG;
+            color: rgba(233, 218, 252, 0.3);
+          }
+
+          &:active {
+            background-color: $flinderLogo;
+          }
+      }
+    }
+}
 
 

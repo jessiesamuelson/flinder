@@ -1,20 +1,14 @@
 <div class="header clearfix">
   <nav class="main-nav">
     <span>
-      <img src="/logo_text.png" alt="Flinder Text Logo" class="nav-logo" height="25px" />
+      <a href="<%= root_path %>"><img src="/logo_text.png" alt="Flinder Text Logo" class="nav-logo" height="25px" /></a>
     </span>
     <div class="upper-nav">
       <ul class="nav-links">
         <li class="nav-link"><a href="#">About Us</a></li>
-        <li class="nav-link"><a href="#">Sign Up</a></li>
-        <li class="nav-link"><a href="#">Log In</a></li>
+        <li class="nav-link"><a href="<%= new_user_path %>">Sign Up</a></li>
+        <li class="nav-link"><a href="<%= login_path %>">Log In</a></li>
       </ul>
     </div>
   </nav>
-
-  <div class="logo">
-    <a href="/dashboard">
-      <img src="/favicon.png" alt="Flinder Logo">
-    </a>
-  </div>
 </div>
