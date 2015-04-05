@@ -39,14 +39,20 @@ $(function(){
           $spinner.empty();
           $('#my-search').ScrollTo();
 
-          var $tw_ul = $("#my-twitter-search-result").append("<h2></h2>").text(data[3])
+          var $tw_ul = $("#my-twitter-search-result");
+          var $tw_div = $("#tw-search-result");
+          var $tw_h1 = ("<h1>Twitter " + data[3] + " Results</h1>");
+          $tw_div.prepend($tw_h1);
           data[0].forEach(function(tweet){
             $("<li></li>")
               .attr('class', 'tw-result')
               .append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>"))
               .appendTo($tw_ul)
           })
-          var $gs_ul = $("#my-guidestar-results").append("<h2></h2>").text(data[3]);
+          var $gs_ul = $("#my-guidestar-results");
+          var $gs_div = $("#gs-search-result");
+          var $gs_h1 = ("<h1>GuideStar " + data[3] + " Results</h1>");
+          $gs_div.prepend($gs_h1);
           if (data[1] != null){
             data[1].forEach(function(org){
               $("<li></li>").attr('id', "organization-" + org["organization_id"])
@@ -171,14 +177,21 @@ $(function(){
           $spinner.empty();
           $('#topic-search').ScrollTo();
 
-          var $tw_ul = $("#topic-twitter-search-result").append("<h2></h2>").text(data[2])
+          var $tw_ul = $("#topic-twitter-search-result");
+          var $tw_div = $("#tw-click-result");
+          var $tw_h1 = ("<h1>Twitter " + data[2] + " Results</h1>");
+          $tw_div.prepend($tw_h1);
+
           data[0].forEach(function(tweet){
             $("<li></li>")
               .attr('class', 'tw-result')
               .append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>"))
               .appendTo($tw_ul)
           })
-          var $gs_ul = $("#topic-guidestar-results").append("<h2></h2>").text(data[2]);
+          var $gs_ul = $("#topic-guidestar-results");
+          var $gs_div = $("#gs-click-result");
+          var $gs_h1 = ("<h1>GuideStar " + data[2] + " Results</h1>");
+          $gs_div.prepend($gs_h1);
           if (data[1] != null){
             data[1].forEach(function(org){
               $("<li></li>").attr('id', "organization-" + org["organization_id"])
