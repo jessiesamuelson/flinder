@@ -7,6 +7,10 @@ class NytController < ApplicationController
 		# takes user's input from the form
 		@user_search_term = URI.escape(params['topic'] + " " + params['location'])
 		user_search_term = params['topic'] + " " +  params['location']
+
+		# removes parentheses from string
+		@user_search_term = @user_search_term.gsub(/[()]/, "")
+
 		# loads tweets with user input
 		@tweets = load_tweets(@user_search_term)
 
@@ -68,8 +72,10 @@ class NytController < ApplicationController
 		@user_choice = params['topic']
 		user_cgi_choice = URI.escape(params['topic'])
 
-		@tweets = load_tweets(@user_choice)
 		# Removes tweets with the same first 4 words
+		@user_choice = @user_choice.gsub(/[()]/, "")
+
+		@tweets = load_tweets(@user_choice)
 		i = 0
 		while i < @tweets.length do
 			j = i + 1
