@@ -26,6 +26,7 @@ $(function(){
     $form.on('submit', function(e){
       e.preventDefault();
 
+      // places spinner on the middle of the page
       $spinner.append("<img src='/spinner.gif' />")
         .css("top", Math.max(0, (($(window).height() - 200) / 2) + $(window).scrollTop()) + "px")
         .css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
@@ -64,15 +65,11 @@ $(function(){
               var setUpStats = function(stats){
                   var height = 150;
                   var width = 480;
-                  
-                  // var $svgObject = $('#' + organization_id);                  
-
                   var svg = d3.select('#' + organization_id)
                     .attr('width', width)
                     .attr('height', height)
                     // .style('background-color', '#')
                   
-
                   svg.selectAll('rect')
                     .data(stats)
                     .exit()
@@ -170,7 +167,7 @@ $(function(){
               $('#organization-' + org['organization_id']).append($("<div></div>").text("Income Total: " + formattedIncome)).append($("<div></div>")
                 .text("Revenue Total: " + formattedRevenue))
                 .append('<svg class="stats-field" id='+ organization_id+ '></svg>');
-                
+
                 var setUpStats = function(stats){
                   var height = 150;
                   var width = 480;
