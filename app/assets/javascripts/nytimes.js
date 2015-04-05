@@ -48,7 +48,12 @@ $(function(){
           var $gs_ul = $("#my-guidestar-results").append("<h2></h2>").text(data[3]);
           if (data[1] != null){
             data[1].forEach(function(org){
-              $("<li></li>").attr('id', "organization-" + org["organization_id"]).text(org["organization_name"]).appendTo($gs_ul).append($("<div></div>").text(org["mission"]))
+              $("<li></li>").attr('id', "organization-" + org["organization_id"])
+                .attr('class', 'gs-result')
+                .text(org["organization_name"])
+                .appendTo($gs_ul)
+                .append($("<div></div>")
+                .text(org["mission"]))
             })        
           }
           if (data[4] != null){
@@ -163,6 +168,7 @@ $(function(){
           if (data[1] != null){
             data[1].forEach(function(org){
               $("<li></li>").attr('id', "organization-" + org["organization_id"])
+                .attr('class', 'gs-result')
                 .text(org["organization_name"])
                 .appendTo($gs_ul).append($("<div></div>").text(org["mission"]))
             })        
@@ -171,6 +177,12 @@ $(function(){
             data[3].forEach(function(org){
               var $statsArray = [{value: org["revenue_total"], type: "revenue total"}, {value: org["income_total"], type: "income total"}];
               var organization_id = "svg-" + org['organization_id'];
+              // if (revenue === null){
+              //   revenue = "Information unavailable"
+              // } else {
+
+              // }
+
 
               var revenue = "$" + org["revenue_total"];
               var formattedRevenue = (revenue).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
