@@ -75,7 +75,7 @@ $(function(){
 
                   var scaleX = d3.scale.linear()
                     .domain([0, maxStat])
-                    .range([0, 300])
+                    .range([0, maxStat/500])
 
 
                   var svg = d3.select('#' + organization_id)
@@ -190,16 +190,10 @@ $(function(){
                   });                  
                   var maxStat = d3.max(stats, function(d){return d.value;
                   });
-                  
-                  // var upperLimit = if (maxStat/30 < 450) {
-                  //   return maxStat/30
-                  // } else {
-                  //   return 450
-                  // }
 
                   var scaleX = d3.scale.linear()
                     .domain([0, maxStat])
-                    .range([0, 300])           
+                    .range([0, maxStat/500])           
 
                   var svg = d3.select('#' + organization_id)
                     .attr('width', width)
