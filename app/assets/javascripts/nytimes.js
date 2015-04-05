@@ -57,7 +57,7 @@ $(function(){
             data[1].forEach(function(org){
               $("<li></li>").attr('id', "organization-" + org["organization_id"])
                 .attr('class', 'gs-result')
-                .text(org["organization_name"])
+                .append("<h3>" + org["organization_name"] + "</h3>")
                 .appendTo($gs_ul)
                 .append($("<div></div>")
                 .text(org["mission"]))
@@ -85,8 +85,10 @@ $(function(){
               } 
 
               $('#organization-' + org['organization_id'])
-                .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
-                .append($("<div></div>").text("Income Total: " + formattedIncome)).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
+                .append($("<div></div>")
+                .text("Revenue Total: " + formattedRevenue))
+                .append($("<div></div>")
+                .text("Income Total: " + formattedIncome)).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
               var setUpStats = function(stats){
                   var height = 150;
                   var width = 480;
@@ -179,6 +181,7 @@ $(function(){
           var $tw_ul = $("#topic-twitter-search-result");
           var $tw_div = $("#tw-click-result");
           var $tw_h1 = ("<h1>Twitter Results for " + data[2] + "</h1>");
+          $tw_ul.empty();
           $tw_div.prepend($tw_h1);
 
           data[0].forEach(function(tweet){
@@ -190,13 +193,16 @@ $(function(){
           var $gs_ul = $("#topic-guidestar-results");
           var $gs_div = $("#gs-click-result");
           var $gs_h1 = ("<h1>GuideStar Results for " + data[2] + "</h1>");
+
+          $gs_ul.empty();
           $gs_div.prepend($gs_h1);
           if (data[1] != null){
             data[1].forEach(function(org){
               $("<li></li>").attr('id', "organization-" + org["organization_id"])
                 .attr('class', 'gs-result')
-                .text(org["organization_name"])
-                .appendTo($gs_ul).append($("<div></div>").text(org["mission"]))
+                .append("<h3>" + org["organization_name"] + "</h3>")
+                .appendTo($gs_ul).append($("<div></div>")
+                .text(org["mission"]))
             })        
           }
           if (data[3] != null){
@@ -205,7 +211,7 @@ $(function(){
               var organization_id = "svg-" + org['organization_id'];
               
               var revenue = org["revenue_total"];
-              console.log(revenue)
+
               if (revenue == undefined || revenue == 0){
                 var formattedRevenue = "Information unavailable";
               } else {
@@ -218,7 +224,7 @@ $(function(){
               } else {
                 income = "$" + org["income_total"];
                 var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-              } 
+              }; 
               if (formattedIncome == "Information unavailable" && formattedRevenue == "Information unavailable") {
                 $('#organization-' + org['organization_id'])
                 .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
@@ -228,7 +234,7 @@ $(function(){
                 .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
                 .append($("<div></div>").text("Income Total: " + formattedIncome))
                 .append('<svg class="stats-field" id='+ organization_id+ '></svg>');
-              }
+              };
 
                 var setUpStats = function(stats){
                   var height = 150;
