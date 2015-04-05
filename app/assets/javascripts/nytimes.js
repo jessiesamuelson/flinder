@@ -219,11 +219,16 @@ $(function(){
                 income = "$" + org["income_total"];
                 var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
               } 
-              
-              $('#organization-' + org['organization_id'])
+              if (formattedIncome == "Information unavailable" && formattedRevenue == "Information unavailable") {
+                $('#organization-' + org['organization_id'])
+                .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
+                .append($("<div></div>").text("Income Total: " + formattedIncome))
+              } else {
+                $('#organization-' + org['organization_id'])
                 .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
                 .append($("<div></div>").text("Income Total: " + formattedIncome))
                 .append('<svg class="stats-field" id='+ organization_id+ '></svg>');
+              }
 
                 var setUpStats = function(stats){
                   var height = 150;
