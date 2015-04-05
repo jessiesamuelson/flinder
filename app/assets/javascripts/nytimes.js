@@ -61,10 +61,21 @@ $(function(){
               var $statsArray = [{value: org["revenue_total"], type: "revenue total"}, {value: org["income_total"], type: "income total"}];
               var organization_id = "svg-" + org['organization_id'];
               
-              var revenue = "$" + org["revenue_total"];
-              var formattedRevenue = (revenue).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-              var income = "$" + org["income_total"];
-              var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              var revenue = org["revenue_total"];
+              console.log(revenue)
+              if (revenue == undefined || revenue == 0){
+                var formattedRevenue = "Information unavailable";
+              } else {
+                revenue = "$" + org["revenue_total"];
+                var formattedRevenue = (revenue).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              }
+              var income = org["income_total"];
+              if (income == undefined || income == 0){
+                var formattedIncome = "Information unavailable";
+              } else {
+                income = "$" + org["income_total"];
+                var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              } 
 
               $('#organization-' + org['organization_id'])
                 .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
@@ -177,17 +188,22 @@ $(function(){
             data[3].forEach(function(org){
               var $statsArray = [{value: org["revenue_total"], type: "revenue total"}, {value: org["income_total"], type: "income total"}];
               var organization_id = "svg-" + org['organization_id'];
-              // if (revenue === null){
-              //   revenue = "Information unavailable"
-              // } else {
-
-              // }
-
-
-              var revenue = "$" + org["revenue_total"];
-              var formattedRevenue = (revenue).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-              var income = "$" + org["income_total"];
-              var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              
+              var revenue = org["revenue_total"];
+              console.log(revenue)
+              if (revenue == undefined || revenue == 0){
+                var formattedRevenue = "Information unavailable";
+              } else {
+                revenue = "$" + org["revenue_total"];
+                var formattedRevenue = (revenue).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              }
+              var income = org["income_total"];
+              if (income == undefined || income == 0){
+                var formattedIncome = "Information unavailable";
+              } else {
+                income = "$" + org["income_total"];
+                var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              } 
               
               $('#organization-' + org['organization_id'])
                 .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
