@@ -28,8 +28,8 @@ $(function(){
 
       // places spinner on the middle of the page
       $spinner.append("<img src='/spinner.gif' />")
-        .css("top", Math.max(0, (($(window).height() * 0.5) / 2) + $(window).scrollTop()) + "px")
-        .css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
+        .css("top", Math.max(0, (($(window).height()) / 2) + $(window).scrollTop()) + "px")
+        .css("left", Math.max(0, (($(window).width() - 375) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
 
       $.ajax({
         url: '/user_choice',
@@ -41,7 +41,7 @@ $(function(){
 
           var $tw_ul = $("#my-twitter-search-result");
           var $tw_div = $("#tw-search-result");
-          var $tw_h1 = ("<h1>Twitter Results " + data[3] + "</h1>");
+          var $tw_h1 = ("<h1>Tweets About " + data[3] + "</h1>");
           $tw_div.prepend($tw_h1);
           data[0].forEach(function(tweet){
             $("<li></li>")
@@ -60,7 +60,7 @@ $(function(){
                 .append("<h3>" + org["organization_name"] + "</h3>")
                 .appendTo($gs_ul)
                 .append($("<div></div>")
-                .text(org["mission"]))
+                .append("<p class='mission'>" + org["mission"] + "</p>"))
             })        
           }
           if (data[4] != null){
@@ -84,11 +84,17 @@ $(function(){
                 var formattedIncome = (income).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
               } 
 
-              $('#organization-' + org['organization_id'])
-                .append($("<div></div>")
-                .text("Revenue Total: " + formattedRevenue))
-                .append($("<div></div>")
-                .text("Income Total: " + formattedIncome)).append('<svg class="stats-field" id='+ organization_id+ '></svg>')
+              if (formattedIncome == "Information unavailable" && formattedRevenue == "Information unavailable") {
+                $('#organization-' + org['organization_id'])
+                .append($("<p class='stats'></p>").text("Revenue Total: " + formattedRevenue))
+                .append($("<p class='stats'></p>").text("Income Total: " + formattedIncome))
+              } else {
+                $('#organization-' + org['organization_id'])
+                .append($("<p class='stats'></p>").text("Revenue Total: " + formattedRevenue))
+                .append($("<p class='stats'></p>").text("Income Total: " + formattedIncome))
+                .append('<svg class="stats-field" id='+ organization_id+ '></svg>');
+              };
+
               var setUpStats = function(stats){
                   var height = 150;
                   var width = 480;
@@ -157,6 +163,7 @@ $(function(){
     })
   };
 
+  // gets topic from nytimes top stories
   function getUserClick() {
     var $spinner = $('.spinner');
 
@@ -165,8 +172,8 @@ $(function(){
 
       // places spinner on the middle of the page
       $spinner.append("<img src='/spinner.gif' />")
-        .css("top", Math.max(0, (($(window).height() * 0.5) / 2) + $(window).scrollTop()) + "px")
-        .css("left", Math.max(0, (($(window).width() - 350) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
+        .css("top", Math.max(0, (($(window).innerHeight() - 500) / 2) + $(window).scrollTop()) + "px")
+        .css("left", Math.max(0, (($(window).width() - 375) / 2) + $(window).scrollLeft()) + "px").hide().fadeIn(200);
 
       $.ajax({
         url: '/user_click',
@@ -180,7 +187,7 @@ $(function(){
 
           var $tw_ul = $("#topic-twitter-search-result");
           var $tw_div = $("#tw-click-result");
-          var $tw_h1 = ("<h1>Twitter Results for " + data[2] + "</h1>");
+          var $tw_h1 = ("<h1>Tweets About " + data[2] + "</h1>");
           $tw_ul.empty();
           $tw_div.prepend($tw_h1);
 
@@ -202,7 +209,7 @@ $(function(){
                 .attr('class', 'gs-result')
                 .append("<h3>" + org["organization_name"] + "</h3>")
                 .appendTo($gs_ul).append($("<div></div>")
-                .text(org["mission"]))
+                .append("<p class='mission'>" + org["mission"] + "</p>"))
             })        
           }
           if (data[3] != null){
@@ -227,12 +234,12 @@ $(function(){
               }; 
               if (formattedIncome == "Information unavailable" && formattedRevenue == "Information unavailable") {
                 $('#organization-' + org['organization_id'])
-                .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
-                .append($("<div></div>").text("Income Total: " + formattedIncome))
+                .append($("<p class='stats'></p>").text("Revenue Total: " + formattedRevenue))
+                .append($("<p class='stats'></p>").text("Income Total: " + formattedIncome))
               } else {
                 $('#organization-' + org['organization_id'])
-                .append($("<div></div>").text("Revenue Total: " + formattedRevenue))
-                .append($("<div></div>").text("Income Total: " + formattedIncome))
+                .append($("<p class='stats'></p>").text("Revenue Total: " + formattedRevenue))
+                .append($("<p class='stats'></p>").text("Income Total: " + formattedIncome))
                 .append('<svg class="stats-field" id='+ organization_id+ '></svg>');
               };
 
@@ -334,7 +341,7 @@ $(function(){
       } else {
         $topicOfChoice = article['geo_facet'][0].split(' ')[0];
       }
-    } else {};
+    };
 
     var $text;
     if (article['des_facet'] != '' && article ['geo_facet'] != '') {
@@ -354,7 +361,7 @@ $(function(){
 
     if ($text === undefined) {
       var $submitInput = $("<div></div>")
-        .append("<p>Test</p>")
+        .append("<p></p>")
         .attr('class', 'green-form');
     } else {
       var $submitInput = $("<input type='submit'>")

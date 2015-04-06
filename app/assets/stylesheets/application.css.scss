@@ -28,22 +28,12 @@ body {
   background-color: $flinderBG;
 }
 
-h1::selection {  
+*::selection {  
   background-color: $flinderLogo;
   color: #FFF;
 }
 
-h1::-moz-selection {  
-  background-color: $flinderLogo;
-  color: #FFF;
-}
-
-label::selection {  
-  background-color: $flinderLogo;
-  color: #FFF;
-}
-
-label::-moz-selection {  
+*::-moz-selection {  
   background-color: $flinderLogo;
   color: #FFF;
 }
@@ -57,7 +47,7 @@ label::-moz-selection {
   background-color: rgba(0, 0, 0, 0.5);
 
   p {
-    width: 600px;
+    width: 400px;
     margin: 0 auto;
     padding: 55px 0;
     font-size: 12px;
@@ -69,7 +59,7 @@ label::-moz-selection {
 }
 
 .spinner {
-  position: fixed;
+  position: absolute;
   z-index: 1;
 
   img {
@@ -221,7 +211,7 @@ label::-moz-selection {
   @include outer-container(1000px);
   h1.nyt-header {
     margin-top: 50px;
-    margin-bottom: 25px;
+    /*margin-bottom: 25px;*/
   }
 }
 
@@ -288,10 +278,16 @@ h1 {
   padding: 5px;
   white-space: normal;
   border: 1px solid $flinderFG;
-    
-  a {
-    color: $flinderFG;
-    text-decoration: none;
+  background-color: $flinderFG;
+  color: #FFF;
+
+  .stats {
+    margin: 5px 0;
+    font-style: italic;
+  }
+
+  .mission {
+    margin: 5px 0;
   }
 }
 
@@ -300,8 +296,8 @@ h1 {
 .tw-result {
   margin: 8px;
   padding: 5px;
-  border: 1px solid $flinderFG;
   white-space: normal;
+  border: 1px solid $flinderFG;
   background-color: $flinderFG;
 
   &:hover {
