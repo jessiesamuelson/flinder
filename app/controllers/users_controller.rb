@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def twitter_login
     if current_user && current_user.oauth_token
-      redirect_to "/users/#{current_user.id}"
+      redirect_to root_path
     else  
       session[:twitter_request_token] = twitter_accessor.get_request_token 
       redirect_to session[:twitter_request_token].authorize_url
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         login!(@user)
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to root_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
       @user.destroy
       reset_session
       respond_to do |format|
-        format.html { redirect_to signup_path, notice: 'User was successfully destroyed.' }
+        format.html { redirect_to root_path, notice: 'User was successfully destroyed.' }
         format.json { head :no_content }
       end
     else
