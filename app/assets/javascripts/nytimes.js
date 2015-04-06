@@ -39,9 +39,15 @@ $(function(){
           $spinner.empty();
           $('#my-search').ScrollTo();
 
-          var $tw_ul = $("#my-twitter-search-result");
+          // var $tw_ul = $("#my-twitter-search-result");
+          var $tw_ul = $("<ul></ul>");
           var $tw_div = $("#tw-search-result");
           var $tw_h1 = ("<h1>Tweets About " + data[3] + "</h1>");
+
+          $tw_ul.empty();
+          $tw_div.empty();
+
+          $tw_div.append($tw_ul);
           $tw_div.prepend($tw_h1);
           data[0].forEach(function(tweet){
             $("<li></li>")
@@ -49,9 +55,14 @@ $(function(){
               .append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>"))
               .appendTo($tw_ul)
           })
-          var $gs_ul = $("#my-guidestar-results");
+          // var $gs_ul = $("#my-guidestar-results");
+          var $gs_ul = $("<ul></ul>");
           var $gs_div = $("#gs-search-result");
           var $gs_h1 = ("<h1>GuideStar Results for " + data[3] + "</h1>");
+          $gs_ul.empty();
+          $gs_div.empty();
+
+          $gs_div.append($gs_ul);
           $gs_div.prepend($gs_h1);
           if (data[1] != null){
             data[1].forEach(function(org){
@@ -185,10 +196,14 @@ $(function(){
           $spinner.empty();
           $('#topic-search').ScrollTo();
 
-          var $tw_ul = $("#topic-twitter-search-result");
+          // var $tw_ul = $("#topic-twitter-search-result");
+          var $tw_ul = $("<ul></ul>");
           var $tw_div = $("#tw-click-result");
           var $tw_h1 = ("<h1>Tweets About " + data[2] + "</h1>");
           $tw_ul.empty();
+          $tw_div.empty();
+
+          $tw_div.append($tw_ul);
           $tw_div.prepend($tw_h1);
 
           data[0].forEach(function(tweet){
@@ -197,11 +212,15 @@ $(function(){
               .append($("<a href='https://twitter.com/"+ tweet.user.screen_name + "/status/" + tweet.id_str + "' target='_blank'>"+tweet['text']+"</a>"))
               .appendTo($tw_ul)
           })
-          var $gs_ul = $("#topic-guidestar-results");
+          // var $gs_ul = $("#topic-guidestar-results");
+          var $gs_ul = $("<ul></ul>");
           var $gs_div = $("#gs-click-result");
           var $gs_h1 = ("<h1>GuideStar Results for " + data[2] + "</h1>");
 
           $gs_ul.empty();
+          $gs_div.empty();
+
+          $gs_div.append($gs_ul);
           $gs_div.prepend($gs_h1);
           if (data[1] != null){
             data[1].forEach(function(org){
